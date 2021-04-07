@@ -1,0 +1,16 @@
+0o23121299
+0b0101010101
+0b1123123121
+let //// sdasdsad
+else
+// sdasdsadsa
+/*  
+/*asdasdasdas
+sdasd
+sadasdd   */
+
+const x = function() {
+  return '' + ";";
+}
+
+let y = x == ';' || false; 
