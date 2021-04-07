@@ -54,10 +54,37 @@
 %token DO_KW
 %token ELSE_KW
 %token EXPORT_KW
-%token EXTENDS_KW
-%token
-%token
-%token
+%token FALSE_KW
+%token FINALLY_KW
+%token FOR_KW
+%token FUNCTION_KW
+%token IF_KW
+%token IMPLEMENTS_KW
+%token IMPORT_KW
+%token IN_KW
+%token INSTANCEOF_KW
+%token INTERFACE_KW
+%token LET_KW
+%token NEW_KW
+%token PACKAGE_KW
+%token PUBLIC_KW
+%token PRIVATE_KW
+%token PROTECTED_KW
+%token RETURN_KW
+%token SUPER_KW
+%token STATIC_KW
+%token SWITCH_KW
+%token THIS_KW
+%token THROW_KW
+%token TRUE_KW
+%token TRY_KW
+%token TYPEOF_KW
+%token VAR_KW
+%token VOID_KW
+%token WHILE_KW
+%token WITH_KW
+%token YIELD_KW
+
 
 
 
