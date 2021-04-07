@@ -12,5 +12,53 @@
 %token <Id> ID
 %token <Id> SINGLE_QUOTES_STRING
 %token <Id> DOUBLE_QUOTES_STRING
+%token SEMI_COLON
+%token ADD_ASSIGN_OP
+%token SUB_ASSIGN_OP
+%token MULT_ASSIGN_OP
+%token DIV_ASSIGN_OP
+%token REM_ASSIGN_OP
+%token EXP_ASSIGN_OP
+%token LSHIFT_ASSIGN_OP
+%token RSHIFT_ASSIGN_OP
+%token UNSIGNED_RSHIFT_ASSIGN_OP
+%token BIT_AND_ASSIGN_OP
+%token BIT_XOR_ASSIGN_OP
+%token BIT_OR_ASSIGN_OP
+%token LOG_AND_ASSIGN_OP
+%token LOG_OR_ASSIGN_OP
+%token EQUAL_OP
+%token NOT_EQUAL_OP
+%token STRICT_EQUAL_OP
+%token STRICT_NOT_EQUAL_OP
+%token GREATER_OR_EQUAL_OP
+%token LESS_OR_EQUAL_OP
+%token ARITH_INCR_OP
+%token ARITH_DECR_OP
+%token ARITH_EXP_OP
+%token LEFT_SHIFT_OP
+%token RIGHT_SHIFT_OP
+%token UNSIGNED_RIGHT_SHIFT_OP
+%token LOG_AND_OP
+%token LOG_OR_OP
+%token LOG_NOT_OP
+%token BREAK_KW
+%token CASE_KW
+%token CATCH_KW
+%token CLASS_KW
+%token CONST_KW
+%token CONTINUE_KW
+%token DEBUGGER_KW
+%token DEFAULT_KW
+%token DELETE_KW
+%token DO_KW
+%token ELSE_KW
+%token EXPORT_KW
+%token EXTENDS_KW
+%token
+%token
+%token
+
+
 
 %%
