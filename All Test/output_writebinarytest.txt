@@ -1,0 +1,19 @@
+digraph tree{
+1 [label="program: stmt_list "]
+2 [label="expr_stmt"]
+3 [label="b"]
+1->2->3;
+4 [label="expr_stmt"]
+5 [label="="]
+6 [label="a"]
+1->4->5->6;
+8 [label="+"]
+5->8;
+9 [label="c"]
+8->9;
+11 [label="b"]
+8->11;
+
+
+
+ }

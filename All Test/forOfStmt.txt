@@ -1,0 +1,8 @@
+for(element of array){
+	element = element+1;
+	b = element+3;
+	c = b+4;
+	d = c+5;
+}
+console_in (a=a+b);
+console_out ("Hello World");

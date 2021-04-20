@@ -1,0 +1,18 @@
+function createTable(rows, cols)
+    {
+      var j=1;
+      var output= "Hello\40World! \125";
+      for(i=1;i<=rows;i++)
+      {
+    	output = output;
+        while(j<=cols)
+        {
+  		  output = output;
+   		  j = j+1;
+   		}
+   		 output = output ;
+   		 j = 1;
+    }
+    output = output;
+    document.write(output);
+  }

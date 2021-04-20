@@ -1,0 +1,15 @@
+var expr = 'Papayas';
+switch (expr){ 
+case 'Orange':
+	a=a+1; 
+	break;
+case 'Banana':
+	b=b/a;
+	a=a+5;
+	a=a+1; 
+	break;
+default:
+	b=b/a;
+	a=a+5;
+	a="Hello"; 
+}

@@ -1,0 +1,15 @@
+{
+	s='single'
+	dd="double"
+	z = 10
+	y = 10.011
+	a = b+c
+	d = b-c	
+	e = b*c;
+}
+f = b/c;
+d = a%c;
+a ==b
+a===b;
+!a;
+(a=a+b+c)

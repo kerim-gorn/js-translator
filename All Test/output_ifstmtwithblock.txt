@@ -1,0 +1,267 @@
+digraph tree{
+
+1 [label="program: stmt_list "]
+
+2 [label="block_stmt"]
+1->2;
+
+3 [label="expr_stmt"]
+
+4 [label="="]
+
+5 [label="s"]
+2->3->4->5;
+
+7 [label=" single"]
+4->7;
+
+8 [label="expr_stmt"]
+
+9 [label="="]
+
+10 [label="dd"]
+2->8->9->10;
+
+12 [label=" double"]
+9->12;
+
+13 [label="expr_stmt"]
+
+14 [label="="]
+
+15 [label="z"]
+2->13->14->15;
+
+17 [label="10"]
+14->17;
+
+18 [label="expr_stmt"]
+
+19 [label="="]
+
+20 [label="y"]
+2->18->19->20;
+
+22 [label="10.011000"]
+19->22;
+
+23 [label="expr_stmt"]
+
+24 [label="="]
+
+25 [label="a"]
+2->23->24->25;
+
+27 [label="+"]
+
+28 [label="b"]
+24->27->28;
+
+30 [label="c"]
+27->30;
+
+31 [label="expr_stmt"]
+
+32 [label="="]
+
+33 [label="d"]
+2->31->32->33;
+
+35 [label="-"]
+
+36 [label="b"]
+32->35->36;
+
+38 [label="c"]
+35->38;
+
+39 [label="expr_stmt"]
+
+40 [label="="]
+
+41 [label="e"]
+2->39->40->41;
+
+43 [label="*"]
+
+44 [label="b"]
+40->43->44;
+
+46 [label="c"]
+43->46;
+
+47 [label="expr_stmt"]
+
+48 [label="="]
+
+49 [label="f"]
+1->47->48->49;
+
+51 [label="\\"]
+
+52 [label="b"]
+48->51->52;
+
+54 [label="c"]
+51->54;
+
+55 [label="expr_stmt"]
+
+56 [label="="]
+
+57 [label="d"]
+1->55->56->57;
+
+59 [label="%"]
+
+60 [label="a"]
+56->59->60;
+
+62 [label="c"]
+59->62;
+
+63 [label="expr_stmt"]
+
+64 [label="=="]
+
+65 [label="a"]
+1->63->64->65;
+
+67 [label="b"]
+64->67;
+
+68 [label="expr_stmt"]
+
+69 [label="==="]
+
+70 [label="a"]
+1->68->69->70;
+
+72 [label="b"]
+69->72;
+
+73 [label="if_stmt"]
+1->73;
+
+74 [label=">"]
+
+75 [label="a"]
+73->74->75;
+
+77 [label="b"]
+74->77;
+
+79 [label="block_stmt"]
+73->79;
+
+80 [label="expr_stmt"]
+
+81 [label="="]
+
+82 [label="a"]
+79->80->81->82;
+
+84 [label="+"]
+
+85 [label="a"]
+81->84->85;
+
+87 [label="b"]
+84->87;
+
+88 [label="expr_stmt"]
+
+89 [label="="]
+
+90 [label="a"]
+79->88->89->90;
+
+92 [label="+"]
+
+93 [label="a"]
+89->92->93;
+
+95 [label="10"]
+92->95;
+
+96 [label="expr_stmt"]
+
+97 [label="="]
+
+98 [label="a"]
+79->96->97->98;
+
+100 [label="+"]
+
+101 [label="a"]
+97->100->101;
+
+103 [label="30"]
+100->103;
+
+104 [label="expr_stmt"]
+
+105 [label="="]
+
+106 [label="a"]
+79->104->105->106;
+
+108 [label="+"]
+
+109 [label="a"]
+105->108->109;
+
+111 [label="56"]
+108->111;
+
+113 [label="block_stmt"]
+73->113;
+
+114 [label="expr_stmt"]
+
+115 [label="="]
+
+116 [label="a"]
+113->114->115->116;
+
+118 [label="+"]
+
+119 [label="a"]
+115->118->119;
+
+121 [label="10"]
+118->121;
+
+122 [label="expr_stmt"]
+
+123 [label="="]
+
+124 [label="a"]
+113->122->123->124;
+
+126 [label="+"]
+
+127 [label="a"]
+123->126->127;
+
+129 [label="30"]
+126->129;
+
+130 [label="expr_stmt"]
+
+131 [label="="]
+
+132 [label="a"]
+113->130->131->132;
+
+134 [label="+"]
+
+135 [label="a"]
+131->134->135;
+
+137 [label="56"]
+134->137;
+
+
+
+ }

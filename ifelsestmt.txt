@@ -1,0 +1,4 @@
+if (a>b) a=a+b; else if (a>c) a=a*c; else if (a>c) a=a*c; else if (a>c) a=a*c; else if (a>c) a=a*c; else a=a+b*c;
+if (a>b) a=a+b; else if (a>c) a=a*c; 
+if (a>b) a=a+b; else a=a-b; 
+if (a>b) a=a+b;
