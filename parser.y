@@ -95,7 +95,7 @@ extern FILE* yyin;
 %%
 program: stmt_list { $$ = root = $1;};
 
-exp:   DIGIT						{printf("DIGIT is printed\n"); $$ = createDigitExpr($1);}
+exp:   DIGIT						{printf("DIGIT is printed\n"); $$ = create_digit_expr($1);}
     |  FLOAT_DIGIT					{printf("FLOAT_DIGIT is printed\n");$$ = createFloatExpr($1);}
     |  type ID						{printf("ID is printed\n");$$ = createVariableExpr($2);}
 	|  ID						    {printf("ID is printed\n");$$ = createVariableExpr($1);}
