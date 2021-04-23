@@ -417,7 +417,7 @@ void write_stmt_list(struct stmt_list_struct* _stmtList,
                      char* _parentPath,
                      FILE* _filename)
 {
-	char leftOperandPath[256];
+	char left_operand_path[256];
 	
 	char buffer[50];
 
@@ -429,15 +429,15 @@ void write_stmt_list(struct stmt_list_struct* _stmtList,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", "");
+	sprintf(left_operand_path, "%s", "");
 	sprintf(buffer, "%d", _variableCounter);
-	strcat(leftOperandPath, buffer);
-	strcat(leftOperandPath, "->");
+	strcat(left_operand_path, buffer);
+	strcat(left_operand_path, "->");
 
 	_variableCounter++;
 	while (_stmtList != nullptr)
 	{
-		write_stmt(_stmtList->First, leftOperandPath, _filename);
+		write_stmt(_stmtList->First, left_operand_path, _filename);
 		_stmtList = _stmtList->Next;
 	}
 }
@@ -446,7 +446,7 @@ void write_elseif_stmt_list(struct elseif_stmt_list_struct* _stmtList,
                             char* _parentPath,
                             FILE* _filename)
 {
-	char leftOperandPath[256];
+	char left_operand_path[256];
 	char dataToAppend[256];
 	char buffer[50];
 
@@ -463,15 +463,15 @@ void write_elseif_stmt_list(struct elseif_stmt_list_struct* _stmtList,
 			fputs(buffer, _filename);
 			fputs(";\n", _filename);
 		}
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmtList->First->expr_value, leftOperandPath, _filename);
+		write_expr(_stmtList->First->expr_value, left_operand_path, _filename);
 		_variableCounter++;
-		write_stmt(_stmtList->First->Stmt, leftOperandPath, _filename);
+		write_stmt(_stmtList->First->Stmt, left_operand_path, _filename);
 		_stmtList = _stmtList->Next;
 	}
 }
@@ -480,7 +480,7 @@ void write_case_stmt_list(struct case_stmt_list_struct* _stmtList,
                           char* _parentPath,
                           FILE* _filename)
 {
-	char leftOperandPath[256];
+	char left_operand_path[256];
 	char dataToAppend[256];
 	char buffer[50];
 
@@ -497,17 +497,17 @@ void write_case_stmt_list(struct case_stmt_list_struct* _stmtList,
 			fputs(buffer, _filename);
 			fputs(";\n", _filename);
 		}
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmtList->First->expr_value, leftOperandPath, _filename);
+		write_expr(_stmtList->First->expr_value, left_operand_path, _filename);
 		_variableCounter++;
 		createLabel(_variableCounter, "stmt_block", dataToAppend);
 		fputs(dataToAppend, _filename);
-		write_stmt_list(_stmtList->First->StmtList, leftOperandPath, _filename);
+		write_stmt_list(_stmtList->First->StmtList, left_operand_path, _filename);
 		_stmtList = _stmtList->Next;
 	}
 }
@@ -517,7 +517,7 @@ void write_stmt(struct stmt_struct* _stmt,
                 FILE* _filename)
 {
 	char left_operand_path[256];
-	char rightOperandPath[256];
+	char right_operand_path[256];
 	char dataToAppend[256];
 	char buffer[50];
 
@@ -536,7 +536,7 @@ void write_stmt(struct stmt_struct* _stmt,
 		createLabel(_variableCounter, "expr_stmt", dataToAppend);
 		fputs(dataToAppend, _filename);
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 
 		if (_parentPath != nullptr)
 			strcat(left_operand_path, _parentPath);
@@ -559,7 +559,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -583,7 +583,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
@@ -606,7 +606,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
@@ -617,7 +617,7 @@ void write_stmt(struct stmt_struct* _stmt,
 		_variableCounter++;
 		write_stmt(_stmt->IfStmt->trueBranch, left_operand_path, _filename);
 
-		strcpy(rightOperandPath, left_operand_path);
+		strcpy(right_operand_path, left_operand_path);
 		if (_stmt->IfStmt->elseIfBranchs != nullptr)
 		{
 			_variableCounter++;
@@ -632,9 +632,9 @@ void write_stmt(struct stmt_struct* _stmt,
 				fputs(";\n", _filename);
 			}
 
-			sprintf(leftOperandPath, "%s", "");
-			sprintf(leftOperandPath, "%d", _variableCounter);
-			strcat(leftOperandPath, "->");
+			sprintf(left_operand_path, "%s", "");
+			sprintf(left_operand_path, "%d", _variableCounter);
+			strcat(left_operand_path, "->");
 
 			_variableCounter++;
 			write_elseif_stmt_list(_stmt->IfStmt->elseIfBranchs, left_operand_path, _filename);
@@ -642,7 +642,7 @@ void write_stmt(struct stmt_struct* _stmt,
 		if (_stmt->IfStmt->falseBranch != nullptr)
 		{
 			_variableCounter++;
-			write_stmt(_stmt->IfStmt->falseBranch, rightOperandPath, _filename);
+			write_stmt(_stmt->IfStmt->falseBranch, right_operand_path, _filename);
 		}
 		break;
 	case While:
@@ -657,7 +657,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -679,7 +679,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -705,7 +705,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -727,7 +727,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -761,7 +761,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -785,7 +785,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -805,7 +805,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", "");
+		sprintf(left_operand_path, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(left_operand_path, buffer);
 		strcat(left_operand_path, "->");
@@ -944,7 +944,7 @@ void write_expr_list(struct expr_list_struct* _exprList,
                      char* _parentPath,
                      FILE* _filename)
 {
-	char leftOperandPath[256];
+	char left_operand_path[256];
 	char dataToAppend[256];
 	char buffer[50];
 
@@ -959,16 +959,16 @@ void write_expr_list(struct expr_list_struct* _exprList,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", "");
+	sprintf(left_operand_path, "%s", "");
 
 	sprintf(buffer, "%d", _variableCounter);
-	strcat(leftOperandPath, buffer);
-	strcat(leftOperandPath, "->");
+	strcat(left_operand_path, buffer);
+	strcat(left_operand_path, "->");
 
 	_variableCounter++;
 	while (_exprList != nullptr)
 	{
-		write_expr(_exprList->expr_value, leftOperandPath, _filename);
+		write_expr(_exprList->expr_value, left_operand_path, _filename);
 		_exprList = _exprList->NextExpr;
 	}
 }
@@ -991,7 +991,7 @@ void write_binary_expr(struct expr_struct* _expr,
                        const char* _parentPath,
                        FILE* _filename)
 {
-	char leftOperandPath[256];
+	char left_operand_path[256];
 	char dataToAppend[256];
 	char buffer[50];
 
@@ -1006,16 +1006,16 @@ void write_binary_expr(struct expr_struct* _expr,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", "");
+	sprintf(left_operand_path, "%s", "");
 
 	sprintf(buffer, "%d", _variableCounter);
-	strcat(leftOperandPath, buffer);
-	strcat(leftOperandPath, "->");
+	strcat(left_operand_path, buffer);
+	strcat(left_operand_path, "->");
 
 	_variableCounter++;
-	write_expr(_expr->left, leftOperandPath, _filename);
+	write_expr(_expr->left, left_operand_path, _filename);
 	_variableCounter++;
-	write_expr(_expr->right, leftOperandPath, _filename);
+	write_expr(_expr->right, left_operand_path, _filename);
 }
 
 void write_unary_expr(struct expr_struct* _expr,
@@ -1023,7 +1023,7 @@ void write_unary_expr(struct expr_struct* _expr,
                       const char* _parentPath,
                       FILE* _filename)
 {
-	char leftOperandPath[256];
+	char left_operand_path[256];
 	char dataToAppend[256];
 	char buffer[50];
 
@@ -1038,12 +1038,12 @@ void write_unary_expr(struct expr_struct* _expr,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", "");
+	sprintf(left_operand_path, "%s", "");
 
 	sprintf(buffer, "%d", _variableCounter);
-	strcat(leftOperandPath, buffer);
-	strcat(leftOperandPath, "->");
+	strcat(left_operand_path, buffer);
+	strcat(left_operand_path, "->");
 
 	_variableCounter++;
-	write_expr(_expr->left, leftOperandPath, _filename);
+	write_expr(_expr->left, left_operand_path, _filename);
 }
