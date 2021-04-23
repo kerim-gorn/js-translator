@@ -5,6 +5,8 @@
 #include <conio.h>
 #include <string.h>
 #include "semantic.h"
+
+extern FILE* yyin;
 %}
 
 %error-verbose
@@ -172,8 +174,8 @@ do_while_stmt: DO stmt WHILE '('  exp ')' SEMICOLON newline_seq_opt {$$ = create
 			; 
 
 
-switch_stmt: SWITCH '(' exp ')' '{' newline_seq_opt  case_stmt_list  '}' newline_seq_opt					 {printf("          createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,NULL)}
-			| SWITCH '(' exp ')' '{' newline_seq_opt case_stmt_list default_stmt'}' 	newline_seq_opt 	 {printf("          createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,$8)}
+switch_stmt: SWITCH '(' exp ')' '{' newline_seq_opt  case_stmt_list  '}' newline_seq_opt					 {printf("          createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,NULL); }
+			| SWITCH '(' exp ')' '{' newline_seq_opt case_stmt_list default_stmt'}' 	newline_seq_opt 	 {printf("          createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,$8); }
 			; 
 
 
@@ -215,16 +217,13 @@ console_out: CONSOLE_OUT '(' exp ')' SEMICOLON newline_seq_opt 	{$$ = createCons
 	 	   ;
 %%
 
-void main(int argc, char *argv[]){
+int main(int argc, char *argv[]){
 
 	if(argc>1)
 		yyin = fopen(argv[1], "r");
 	yyparse();
-	char outPutFilename[50];
-	sprintf(outPutFilename,"%s","output_");
-	strcat(outPutFilename, argv[1]);
 	FILE * _filename;
-	_filename = fopen(outPutFilename, "w");
+	_filename = fopen(argv[2], "w");
 	if(_filename == NULL ) yyerror("Eorror opening file");
 	else{
 		printf("Printing Tree\n");
@@ -233,7 +232,7 @@ void main(int argc, char *argv[]){
 	}
 	
 	fclose(_filename);
-	getch();
+	
 }
 
 

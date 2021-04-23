@@ -9,7 +9,7 @@ using namespace std;
 
 
 
-enum constant_type{
+enum constant_type {
     CONSTANT_utf8,
     CONSTANT_int,
     CONSTANT_float,
@@ -17,7 +17,7 @@ enum constant_type{
     CONSTANT_methodRef,
     CONSTANT_nameAndType,
     CONSTANT_class,
-}
+};
 
 class constant_table
 {

@@ -1,21 +1,20 @@
+/* A Bison parser, made by GNU Bison 3.7.1.  */
 
-/* A Bison parser, made by GNU Bison 2.4.1.  */
+/* Bison interface for Yacc-like parsers in C
 
-/* Skeleton interface for Bison's Yacc-like parsers in C
-   
-      Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
-   
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -28,64 +27,78 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
 
-/* Tokens.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     DIGIT = 258,
-     FLOAT_DIGIT = 259,
-     ID = 260,
-     STRINGONEQOUTED = 261,
-     STRINGDOUBLEQUOTED = 262,
-     EQUAL = 263,
-     STRICT_EQUAL = 264,
-     NOT_EQUAL = 265,
-     BIGGER_EQUAL = 266,
-     SMALLER_EQUAL = 267,
-     ASSIGNMENT = 268,
-     POW = 269,
-     OR = 270,
-     NOT = 271,
-     AND = 272,
-     IF = 273,
-     ELSE = 274,
-     ELSEIF = 275,
-     FOR = 276,
-     WHILE = 277,
-     DO = 278,
-     SWITCH = 279,
-     CASE = 280,
-     BREAK = 281,
-     DEFAULT = 282,
-     OF = 283,
-     CONSOLE_IN = 284,
-     CONSOLE_OUT = 285,
-     SEMICOLON = 286,
-     NEWLINE = 287,
-     LET = 288,
-     VAR = 289,
-     CONST = 290,
-     FINAL = 291,
-     UPLUS = 292,
-     UMINUS = 293
-   };
+#ifndef YY_YY_PARSER_TAB_H_INCLUDED
+# define YY_YY_PARSER_TAB_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
 #endif
 
+/* Token kinds.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    DIGIT = 258,                   /* DIGIT  */
+    FLOAT_DIGIT = 259,             /* FLOAT_DIGIT  */
+    ID = 260,                      /* ID  */
+    STRINGONEQOUTED = 261,         /* STRINGONEQOUTED  */
+    STRINGDOUBLEQUOTED = 262,      /* STRINGDOUBLEQUOTED  */
+    EQUAL = 263,                   /* EQUAL  */
+    STRICT_EQUAL = 264,            /* STRICT_EQUAL  */
+    NOT_EQUAL = 265,               /* NOT_EQUAL  */
+    BIGGER_EQUAL = 266,            /* BIGGER_EQUAL  */
+    SMALLER_EQUAL = 267,           /* SMALLER_EQUAL  */
+    ASSIGNMENT = 268,              /* ASSIGNMENT  */
+    POW = 269,                     /* "**"  */
+    OR = 270,                      /* OR  */
+    NOT = 271,                     /* NOT  */
+    AND = 272,                     /* AND  */
+    IF = 273,                      /* IF  */
+    ELSE = 274,                    /* ELSE  */
+    ELSEIF = 275,                  /* ELSEIF  */
+    FOR = 276,                     /* FOR  */
+    WHILE = 277,                   /* WHILE  */
+    DO = 278,                      /* DO  */
+    SWITCH = 279,                  /* SWITCH  */
+    CASE = 280,                    /* CASE  */
+    BREAK = 281,                   /* BREAK  */
+    DEFAULT = 282,                 /* DEFAULT  */
+    OF = 283,                      /* OF  */
+    CONSOLE_IN = 284,              /* CONSOLE_IN  */
+    CONSOLE_OUT = 285,             /* CONSOLE_OUT  */
+    SEMICOLON = 286,               /* SEMICOLON  */
+    NEWLINE = 287,                 /* NEWLINE  */
+    LET = 288,                     /* LET  */
+    VAR = 289,                     /* VAR  */
+    CONST = 290,                   /* CONST  */
+    FINAL = 291,                   /* FINAL  */
+    UMINUS = 292,                  /* UMINUS  */
+    UPLUS = 293                    /* UPLUS  */
+  };
+  typedef enum yytokentype yytoken_kind_t;
+#endif
 
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
+union YYSTYPE
 {
-
-/* Line 1676 of yacc.c  */
-#line 11 "parser.y"
+#line 13 "parser.y"
 
 	int Int_val;
 	float Float;
@@ -105,16 +118,17 @@ typedef union YYSTYPE
 	struct default_stmt_struct* default_stmt_value;
 	struct case_stmt_list_struct *case_stmt_list_value;
 
+#line 122 "parser.tab.h"
 
-
-/* Line 1676 of yacc.c  */
-#line 112 "parser.tab.h"
-} YYSTYPE;
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+
 extern YYSTYPE yylval;
 
+int yyparse (void);
 
+#endif /* !YY_YY_PARSER_TAB_H_INCLUDED  */
