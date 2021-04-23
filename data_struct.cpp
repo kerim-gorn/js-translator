@@ -30,7 +30,7 @@ struct expr_struct* create_variable_expr(char* _value)
 }
 
 
-struct expr_struct* create_binary_opeartion_expr(enum exprType _type, struct expr_struct* _left,
+struct expr_struct* create_binary_operation_expr(enum exprType _type, struct expr_struct* _left,
                                               struct expr_struct* _right)
 {
 	auto result = static_cast<expr_struct*>(malloc(sizeof(struct expr_struct)));
@@ -42,7 +42,7 @@ struct expr_struct* create_binary_opeartion_expr(enum exprType _type, struct exp
 	return result;
 }
 
-struct expr_struct* create_unary_opeartion_expr(enum exprType _type, struct expr_struct* _left)
+struct expr_struct* create_unary_operation_expr(enum exprType _type, struct expr_struct* _left)
 {
 	auto result = static_cast<expr_struct*>(malloc(sizeof(struct expr_struct)));
 

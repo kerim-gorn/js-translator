@@ -96,32 +96,32 @@ extern FILE* yyin;
 program: stmt_list { $$ = root = $1;};
 
 exp:   DIGIT						{printf("DIGIT is printed\n"); $$ = create_digit_expr($1);}
-    |  FLOAT_DIGIT					{printf("FLOAT_DIGIT is printed\n");$$ = createFloatExpr($1);}
-    |  type ID						{printf("ID is printed\n");$$ = createVariableExpr($2);}
-	|  ID						    {printf("ID is printed\n");$$ = createVariableExpr($1);}
-    |  STRINGONEQOUTED				{printf("STRINGONEQOUTED is printed\n");$$ = createVariableExpr($1);}
-    |  STRINGDOUBLEQUOTED			{printf("STRINGDOUBLEQUOTED is printed\n");$$ = createVariableExpr($1);}
-	| exp '[' exp ']'				{printf("exp \'[\' exp \']\' worked\n"); $$ = createBinaryOpeartionExpr(array_element_access, $1, $3);}
+    |  FLOAT_DIGIT					{printf("FLOAT_DIGIT is printed\n");$$ = create_float_expr($1);}
+    |  type ID						{printf("ID is printed\n");$$ = create_variable_expr($2);}
+	|  ID						    {printf("ID is printed\n");$$ = create_variable_expr($1);}
+    |  STRINGONEQOUTED				{printf("STRINGONEQOUTED is printed\n");$$ = create_variable_expr($1);}
+    |  STRINGDOUBLEQUOTED			{printf("STRINGDOUBLEQUOTED is printed\n");$$ = create_variable_expr($1);}
+	| exp '[' exp ']'				{printf("exp \'[\' exp \']\' worked\n"); $$ = create_binary_operation_expr(array_element_access, $1, $3);}
 	| '(' exp ')' 					{printf("\'(\' exp \')\' worked\n"); $$ = $2;}
-	| exp '+' exp 					{printf("exp + exp  worked\n");$$ = createBinaryOpeartionExpr(Plus, $1 , $3);}
-	| exp '-' exp 					{printf("exp - exp  worked\n");$$ = createBinaryOpeartionExpr(Minus, $1 , $3);}	
-	| exp '*' exp 					{printf("exp * exp  worked\n");$$ = createBinaryOpeartionExpr(Mul, $1 , $3);}
-	| exp '/' exp 					{printf("exp / exp  worked\n");$$ = createBinaryOpeartionExpr(Div, $1 , $3);}
-	| exp '%' exp					{printf("exp Remi exp  worked\n");$$ = createBinaryOpeartionExpr(Remi, $1 , $3);}
-	| exp EQUAL exp 				{printf("exp EQUAL exp  worked\n");$$ = createBinaryOpeartionExpr(EQ, $1 , $3);}
-	| exp STRICT_EQUAL exp  		{printf("exp STRICT_EQUAL exp  worked\n");$$ = createBinaryOpeartionExpr(SEQ, $1 , $3);}
-	| exp NOT_EQUAL exp 			{printf("exp NOT_EQUAL exp  worked\n");$$ = createBinaryOpeartionExpr(NEQ, $1 , $3);}
-	| exp '>' exp 					{printf("exp > exp  worked\n");$$ = createBinaryOpeartionExpr(GR, $1 , $3);}
-	| exp '<' exp  					{printf("exp < exp  worked\n");$$ = createBinaryOpeartionExpr(SM, $1 , $3);}
-	| exp BIGGER_EQUAL exp 			{printf("exp >= exp  worked\n");$$ = createBinaryOpeartionExpr(GREQ, $1 , $3);}
-	| exp SMALLER_EQUAL exp 		{printf("exp <= exp  worked\n");$$ = createBinaryOpeartionExpr(SMEQ, $1 , $3);}
-	| exp ASSIGNMENT exp 			{printf("exp = exp  worked\n");$$ = createBinaryOpeartionExpr(Assign, $1 , $3);}
-	| exp POW exp					{printf("exp POW exp  worked\n");$$ = createBinaryOpeartionExpr(Pow, $1 , $3);}
-	| exp OR exp 					{printf("exp OR exp  worked\n");$$ = createBinaryOpeartionExpr(Or, $1 , $3);}
-	| exp AND exp 					{printf("exp AND exp  worked\n");$$ = createBinaryOpeartionExpr(And, $1 , $3);}
-	| NOT exp						{printf("NOT exp  worked\n");$$ = createUnaryOpeartionExpr(Not, $2 );}
-	| '+' exp %prec UPLUS			{printf(" + exp  worked\n");$$ = createUnaryOpeartionExpr(Uplu, $2 );}
-	| '-' exp %prec UMINUS 		{printf(" - exp  worked\n");$$ = createUnaryOpeartionExpr(Umin, $2 );}	;
+	| exp '+' exp 					{printf("exp + exp  worked\n");$$ = create_binary_operation_expr(Plus, $1 , $3);}
+	| exp '-' exp 					{printf("exp - exp  worked\n");$$ = create_binary_operation_expr(Minus, $1 , $3);}	
+	| exp '*' exp 					{printf("exp * exp  worked\n");$$ = create_binary_operation_expr(Mul, $1 , $3);}
+	| exp '/' exp 					{printf("exp / exp  worked\n");$$ = create_binary_operation_expr(Div, $1 , $3);}
+	| exp '%' exp					{printf("exp Remi exp  worked\n");$$ = create_binary_operation_expr(Remi, $1 , $3);}
+	| exp EQUAL exp 				{printf("exp EQUAL exp  worked\n");$$ = create_binary_operation_expr(EQ, $1 , $3);}
+	| exp STRICT_EQUAL exp  		{printf("exp STRICT_EQUAL exp  worked\n");$$ = create_binary_operation_expr(SEQ, $1 , $3);}
+	| exp NOT_EQUAL exp 			{printf("exp NOT_EQUAL exp  worked\n");$$ = create_binary_operation_expr(NEQ, $1 , $3);}
+	| exp '>' exp 					{printf("exp > exp  worked\n");$$ = create_binary_operation_expr(GR, $1 , $3);}
+	| exp '<' exp  					{printf("exp < exp  worked\n");$$ = create_binary_operation_expr(SM, $1 , $3);}
+	| exp BIGGER_EQUAL exp 			{printf("exp >= exp  worked\n");$$ = create_binary_operation_expr(GREQ, $1 , $3);}
+	| exp SMALLER_EQUAL exp 		{printf("exp <= exp  worked\n");$$ = create_binary_operation_expr(SMEQ, $1 , $3);}
+	| exp ASSIGNMENT exp 			{printf("exp = exp  worked\n");$$ = create_binary_operation_expr(Assign, $1 , $3);}
+	| exp POW exp					{printf("exp POW exp  worked\n");$$ = create_binary_operation_expr(Pow, $1 , $3);}
+	| exp OR exp 					{printf("exp OR exp  worked\n");$$ = create_binary_operation_expr(Or, $1 , $3);}
+	| exp AND exp 					{printf("exp AND exp  worked\n");$$ = create_binary_operation_expr(And, $1 , $3);}
+	| NOT exp						{printf("NOT exp  worked\n");$$ = create_unary_operation_expr(Not, $2 );}
+	| '+' exp %prec UPLUS			{printf(" + exp  worked\n");$$ = create_unary_operation_expr(Uplu, $2 );}
+	| '-' exp %prec UMINUS 		{printf(" - exp  worked\n");$$ = create_unary_operation_expr(Umin, $2 );}	;
 	
 stmt:  SEMICOLON  newline_seq_opt						{printf("empty stmt \n"); $$=createStmtNull();}
 	| BREAK SEMICOLON newline_seq_opt 		 			{printf("create break stmt\n"); $$=createStmtBreak();}

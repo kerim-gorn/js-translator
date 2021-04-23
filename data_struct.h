@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-//Структура данных
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 enum exprType
 {
 	Int_val,
@@ -159,9 +159,9 @@ struct array_handling_struct
 struct expr_struct* create_digit_expr(int _num);
 struct expr_struct* create_float_expr(float _float);
 struct expr_struct* create_variable_expr(char* _value);
-struct expr_struct* create_binary_opeartion_expr(enum exprType _type, struct expr_struct* _left,
+struct expr_struct* create_binary_operation_expr(enum exprType _type, struct expr_struct* _left,
                                               struct expr_struct* _right);
-struct expr_struct* create_unary_opeartion_expr(enum exprType _type, struct expr_struct* _left);
+struct expr_struct* create_unary_operation_expr(enum exprType _type, struct expr_struct* _left);
 struct stmt_struct* create_stmt(struct expr_struct* _expr);
 struct stmt_struct* create_stmt_null();
 struct stmt_struct* create_stmt_break();
@@ -201,7 +201,7 @@ struct array_handling_struct* create_array_handling_stmt(struct expr_struct* _ex
 struct expr_list_struct* create_expr_list(struct expr_struct* _expr);
 struct expr_list_struct* add_to_expr_list(struct expr_list_struct* _exprHead, struct expr_struct* _expr);
 
-//Печать дерева функций
+//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 inline struct stmt_list_struct* root;
 inline int _variableCounter = 1;
 void yyerror(const char* s);

@@ -1687,7 +1687,7 @@ yyreduce:
 
   case 9: /* exp: exp '[' exp ']'  */
 #line 104 "parser.y"
-                                                        {printf("exp \'[\' exp \']\' worked\n"); (yyval.expr_value) = createBinaryOpeartionExpr(array_element_access, (yyvsp[-3].expr_value), (yyvsp[-1].expr_value));}
+                                                        {printf("exp \'[\' exp \']\' worked\n"); (yyval.expr_value) = createBinaryOperationExpr(array_element_access, (yyvsp[-3].expr_value), (yyvsp[-1].expr_value));}
 #line 1692 "parser.tab.cpp"
     break;
 
@@ -1699,115 +1699,115 @@ yyreduce:
 
   case 11: /* exp: exp '+' exp  */
 #line 106 "parser.y"
-                                                        {printf("exp + exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Plus, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp + exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Plus, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1704 "parser.tab.cpp"
     break;
 
   case 12: /* exp: exp '-' exp  */
 #line 107 "parser.y"
-                                                        {printf("exp - exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Minus, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp - exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Minus, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1710 "parser.tab.cpp"
     break;
 
   case 13: /* exp: exp '*' exp  */
 #line 108 "parser.y"
-                                                        {printf("exp * exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Mul, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp * exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Mul, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1716 "parser.tab.cpp"
     break;
 
   case 14: /* exp: exp '/' exp  */
 #line 109 "parser.y"
-                                                        {printf("exp / exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Div, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp / exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Div, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1722 "parser.tab.cpp"
     break;
 
   case 15: /* exp: exp '%' exp  */
 #line 110 "parser.y"
-                                                        {printf("exp Remi exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Remi, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp Remi exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Remi, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1728 "parser.tab.cpp"
     break;
 
   case 16: /* exp: exp EQUAL exp  */
 #line 111 "parser.y"
-                                                        {printf("exp EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(EQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(EQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1734 "parser.tab.cpp"
     break;
 
   case 17: /* exp: exp STRICT_EQUAL exp  */
 #line 112 "parser.y"
-                                                {printf("exp STRICT_EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(SEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                {printf("exp STRICT_EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(SEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1740 "parser.tab.cpp"
     break;
 
   case 18: /* exp: exp NOT_EQUAL exp  */
 #line 113 "parser.y"
-                                                {printf("exp NOT_EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(NEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                {printf("exp NOT_EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(NEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1746 "parser.tab.cpp"
     break;
 
   case 19: /* exp: exp '>' exp  */
 #line 114 "parser.y"
-                                                        {printf("exp > exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(GR, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp > exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(GR, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1752 "parser.tab.cpp"
     break;
 
   case 20: /* exp: exp '<' exp  */
 #line 115 "parser.y"
-                                                        {printf("exp < exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(SM, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp < exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(SM, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1758 "parser.tab.cpp"
     break;
 
   case 21: /* exp: exp BIGGER_EQUAL exp  */
 #line 116 "parser.y"
-                                                {printf("exp >= exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(GREQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                {printf("exp >= exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(GREQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1764 "parser.tab.cpp"
     break;
 
   case 22: /* exp: exp SMALLER_EQUAL exp  */
 #line 117 "parser.y"
-                                                {printf("exp <= exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(SMEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                {printf("exp <= exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(SMEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1770 "parser.tab.cpp"
     break;
 
   case 23: /* exp: exp ASSIGNMENT exp  */
 #line 118 "parser.y"
-                                                {printf("exp = exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Assign, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                {printf("exp = exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Assign, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1776 "parser.tab.cpp"
     break;
 
   case 24: /* exp: exp "**" exp  */
 #line 119 "parser.y"
-                                                        {printf("exp POW exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Pow, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp POW exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Pow, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1782 "parser.tab.cpp"
     break;
 
   case 25: /* exp: exp OR exp  */
 #line 120 "parser.y"
-                                                        {printf("exp OR exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Or, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp OR exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(Or, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1788 "parser.tab.cpp"
     break;
 
   case 26: /* exp: exp AND exp  */
 #line 121 "parser.y"
-                                                        {printf("exp AND exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(And, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
+                                                        {printf("exp AND exp  worked\n");(yyval.expr_value) = createBinaryOperationExpr(And, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1794 "parser.tab.cpp"
     break;
 
   case 27: /* exp: NOT exp  */
 #line 122 "parser.y"
-                                                                {printf("NOT exp  worked\n");(yyval.expr_value) = createUnaryOpeartionExpr(Not, (yyvsp[0].expr_value) );}
+                                                                {printf("NOT exp  worked\n");(yyval.expr_value) = createUnaryOperationExpr(Not, (yyvsp[0].expr_value) );}
 #line 1800 "parser.tab.cpp"
     break;
 
   case 28: /* exp: '+' exp  */
 #line 123 "parser.y"
-                                                {printf(" + exp  worked\n");(yyval.expr_value) = createUnaryOpeartionExpr(Uplu, (yyvsp[0].expr_value) );}
+                                                {printf(" + exp  worked\n");(yyval.expr_value) = createUnaryOperationExpr(Uplu, (yyvsp[0].expr_value) );}
 #line 1806 "parser.tab.cpp"
     break;
 
   case 29: /* exp: '-' exp  */
 #line 124 "parser.y"
-                                        {printf(" - exp  worked\n");(yyval.expr_value) = createUnaryOpeartionExpr(Umin, (yyvsp[0].expr_value) );}
+                                        {printf(" - exp  worked\n");(yyval.expr_value) = createUnaryOperationExpr(Umin, (yyvsp[0].expr_value) );}
 #line 1812 "parser.tab.cpp"
     break;
 
