@@ -156,51 +156,50 @@ struct array_handling_struct
 	struct expr_list_struct* ArrayElements;
 };
 
-struct expr_struct* createDigitExpr(int _num);
-struct expr_struct* createFloatExpr(float _float);
-struct expr_struct* createVariableExpr(char* _value);
-struct expr_struct* createBinaryOpeartionExpr(enum exprType _type, struct expr_struct* _left,
+struct expr_struct* create_digit_expr(int _num);
+struct expr_struct* create_float_expr(float _float);
+struct expr_struct* create_variable_expr(char* _value);
+struct expr_struct* create_binary_opeartion_expr(enum exprType _type, struct expr_struct* _left,
                                               struct expr_struct* _right);
-struct expr_struct* createUnaryOpeartionExpr(enum exprType _type, struct expr_struct* _left);
-struct stmt_struct* createStmt(struct expr_struct* _expr);
-struct stmt_struct* createStmtNull();
-struct stmt_struct* createStmtBreak();
-struct stmt_struct* createBlockStmt(struct stmt_list_struct* _block);
-struct stmt_list_struct* createStmtList(struct stmt_struct* _stmt);
-struct stmt_list_struct* addToStmtList(struct stmt_list_struct* _head, struct stmt_struct* _stmt);
-struct stmt_struct* FillIfStmt(struct if_stmt_struct* _ifStmtStruct);
-struct if_stmt_struct* createIfStmt(struct expr_struct* _expr, struct stmt_struct* _stmtTrue,
+struct expr_struct* create_unary_opeartion_expr(enum exprType _type, struct expr_struct* _left);
+struct stmt_struct* create_stmt(struct expr_struct* _expr);
+struct stmt_struct* create_stmt_null();
+struct stmt_struct* create_stmt_break();
+struct stmt_struct* create_block_stmt(struct stmt_list_struct* _block);
+struct stmt_list_struct* create_stmt_list(struct stmt_struct* _stmt);
+struct stmt_list_struct* add_to_stmt_list(struct stmt_list_struct* _head, struct stmt_struct* _stmt);
+struct stmt_struct* fill_if_stmt(struct if_stmt_struct* _ifStmtStruct);
+struct if_stmt_struct* create_if_stmt(struct expr_struct* _expr, struct stmt_struct* _stmtTrue,
                                     struct stmt_struct* _stmtFalse);
-struct if_stmt_struct* createElseIfStmt(struct expr_struct* _expr, struct stmt_struct* _stmtTrue,
+struct if_stmt_struct* create_else_if_stmt(struct expr_struct* _expr, struct stmt_struct* _stmtTrue,
                                         struct elseif_stmt_list_struct* _elseIfStmtList,
                                         struct stmt_struct* _stmtFalse);
-struct elseif_stmt_struct* createSimpleElseIfStmt(struct expr_struct* _expr, struct stmt_struct* _stmt);
-struct elseif_stmt_list_struct* createElseIfStmtList(struct elseif_stmt_struct* _stmt);
-struct elseif_stmt_list_struct* addToElseIfStmtList(struct elseif_stmt_list_struct* _elseIfHead,
+struct elseif_stmt_struct* create_simple_else_if_stmt(struct expr_struct* _expr, struct stmt_struct* _stmt);
+struct elseif_stmt_list_struct* create_else_if_stmt_list(struct elseif_stmt_struct* _stmt);
+struct elseif_stmt_list_struct* add_to_else_if_stmt_list(struct elseif_stmt_list_struct* _elseIfHead,
                                                     struct elseif_stmt_struct* _stmt);
-struct stmt_struct* FillForStmt(struct for_stmt_struct* _forStmt);
-struct for_stmt_struct* createForStmt(struct expr_struct* _initial, struct expr_struct* _condition,
+struct stmt_struct* fill_for_stmt(struct for_stmt_struct* _forStmt);
+struct for_stmt_struct* create_for_stmt(struct expr_struct* _initial, struct expr_struct* _condition,
                                       struct expr_struct* _finalExp, struct stmt_struct* _stmt);
-struct stmt_struct* createWhileStmt(struct expr_struct* _condition, struct stmt_struct* _stmt);
-struct stmt_struct* createDoWhileStmt(struct stmt_struct* _stmt, struct expr_struct* _condition);
-struct stmt_struct* createConsoleInStmt(struct expr_struct* _expr);
-struct stmt_struct* createConsoleOutStmt(struct expr_struct* _expr);
-struct stmt_struct* fillSwitchStmt(struct switch_stmt_struct* _switchStmt);
+struct stmt_struct* create_while_stmt(struct expr_struct* _condition, struct stmt_struct* _stmt);
+struct stmt_struct* create_do_while_stmt(struct stmt_struct* _stmt, struct expr_struct* _condition);
+struct stmt_struct* create_console_in_stmt(struct expr_struct* _expr);
+struct stmt_struct* create_console_out_stmt(struct expr_struct* _expr);
+struct stmt_struct* fill_switch_stmt(struct switch_stmt_struct* _switchStmt);
 struct switch_stmt_struct* createSwitchStmt(struct expr_struct* _expr, struct case_stmt_list_struct* _caseStmtList,
                                             struct default_stmt_struct* _defaultStmt);
-struct case_stmt_list_struct* createCaseStmtList(struct case_stmt_struct* _caseStmt);
-struct case_stmt_list_struct*
-addToCaseStmtList(struct case_stmt_list_struct* _caseHead, struct case_stmt_struct* _stmt);
-struct case_stmt_struct* createCaseStmt(struct expr_struct* _expr, struct stmt_list_struct* _stmtList);
-struct default_stmt_struct* createDefaultStmt(struct stmt_list_struct* _stmtList);
-struct stmt_struct* fillForOfStmt(struct forOf_stmt_struct* _forOfStmt);
-struct forOf_stmt_struct* createForOfStmt(struct expr_struct* _expr, struct expr_struct* _exprIterable,
+struct case_stmt_list_struct* create_case_stmt_list(struct case_stmt_struct* _caseStmt);
+struct case_stmt_list_struct* add_to_case_stmt_list(struct case_stmt_list_struct* _caseHead, struct case_stmt_struct* _stmt);
+struct case_stmt_struct* create_case_stmt(struct expr_struct* _expr, struct stmt_list_struct* _stmtList);
+struct default_stmt_struct* create_default_stmt(struct stmt_list_struct* _stmtList);
+struct stmt_struct* fill_for_of_stmt(struct forOf_stmt_struct* _forOfStmt);
+struct forOf_stmt_struct* create_for_of_stmt(struct expr_struct* _expr, struct expr_struct* _exprIterable,
                                           struct stmt_struct* _stmt);
-struct stmt_struct* createArray(struct array_handling_struct* _array);
-struct array_handling_struct* createArrayHandlingStmt(struct expr_struct* _expr,
+struct stmt_struct* create_array(struct array_handling_struct* _array);
+struct array_handling_struct* create_array_handling_stmt(struct expr_struct* _expr,
                                                       struct expr_list_struct* _arrayElements);
-struct expr_list_struct* createExprList(struct expr_struct* _expr);
-struct expr_list_struct* addToExprList(struct expr_list_struct* _exprHead, struct expr_struct* _expr);
+struct expr_list_struct* create_expr_list(struct expr_struct* _expr);
+struct expr_list_struct* add_to_expr_list(struct expr_list_struct* _exprHead, struct expr_struct* _expr);
 
 //Печать дерева функций
 inline struct stmt_list_struct* root;

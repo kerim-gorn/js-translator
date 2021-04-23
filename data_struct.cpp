@@ -1,7 +1,7 @@
 #include "data_struct.h"
 
 
-struct expr_struct* createDigitExpr(int _num)
+struct expr_struct* create_digit_expr(int _num)
 {
 	auto result = static_cast<expr_struct*>(malloc(sizeof(struct expr_struct)));
 	result->type = Int_val;
@@ -11,7 +11,7 @@ struct expr_struct* createDigitExpr(int _num)
 }
 
 
-struct expr_struct* createFloatExpr(float _float)
+struct expr_struct* create_float_expr(float _float)
 {
 	auto result = static_cast<expr_struct*>(malloc(sizeof(struct expr_struct)));
 	result->type = Float;
@@ -20,7 +20,7 @@ struct expr_struct* createFloatExpr(float _float)
 	return result;
 }
 
-struct expr_struct* createVariableExpr(char* _value)
+struct expr_struct* create_variable_expr(char* _value)
 {
 	auto result = static_cast<expr_struct*>(malloc(sizeof(struct expr_struct)));
 	result->type = Id;
@@ -30,7 +30,7 @@ struct expr_struct* createVariableExpr(char* _value)
 }
 
 
-struct expr_struct* createBinaryOpeartionExpr(enum exprType _type, struct expr_struct* _left,
+struct expr_struct* create_binary_opeartion_expr(enum exprType _type, struct expr_struct* _left,
                                               struct expr_struct* _right)
 {
 	auto result = static_cast<expr_struct*>(malloc(sizeof(struct expr_struct)));
@@ -42,7 +42,7 @@ struct expr_struct* createBinaryOpeartionExpr(enum exprType _type, struct expr_s
 	return result;
 }
 
-struct expr_struct* createUnaryOpeartionExpr(enum exprType _type, struct expr_struct* _left)
+struct expr_struct* create_unary_opeartion_expr(enum exprType _type, struct expr_struct* _left)
 {
 	auto result = static_cast<expr_struct*>(malloc(sizeof(struct expr_struct)));
 
@@ -52,7 +52,7 @@ struct expr_struct* createUnaryOpeartionExpr(enum exprType _type, struct expr_st
 	return result;
 }
 
-struct stmt_struct* createStmt(struct expr_struct* _expr)
+struct stmt_struct* create_stmt(struct expr_struct* _expr)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -62,7 +62,7 @@ struct stmt_struct* createStmt(struct expr_struct* _expr)
 	return temp;
 }
 
-struct stmt_struct* createStmtNull()
+struct stmt_struct* create_stmt_null()
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -72,7 +72,7 @@ struct stmt_struct* createStmtNull()
 	return temp;
 }
 
-struct stmt_struct* createStmtBreak()
+struct stmt_struct* create_stmt_break()
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -88,7 +88,7 @@ struct stmt_struct* createStmtBreak()
 	return temp;
 }
 
-struct stmt_struct* createBlockStmt(struct stmt_list_struct* _block)
+struct stmt_struct* create_block_stmt(struct stmt_list_struct* _block)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -98,7 +98,7 @@ struct stmt_struct* createBlockStmt(struct stmt_list_struct* _block)
 	return temp;
 }
 
-struct stmt_list_struct* createStmtList(struct stmt_struct* _stmt)
+struct stmt_list_struct* create_stmt_list(struct stmt_struct* _stmt)
 {
 	auto temp = static_cast<stmt_list_struct*>(malloc(sizeof(struct stmt_list_struct)));
 
@@ -108,12 +108,11 @@ struct stmt_list_struct* createStmtList(struct stmt_struct* _stmt)
 	return temp;
 }
 
-struct stmt_list_struct* addToStmtList(struct stmt_list_struct* _head, struct stmt_struct* _stmt)
+struct stmt_list_struct* add_to_stmt_list(struct stmt_list_struct* _head, struct stmt_struct* _stmt)
 {
-	auto cur = static_cast<stmt_list_struct*>(malloc(sizeof(struct stmt_list_struct)));
 	auto temp = static_cast<stmt_list_struct*>(malloc(sizeof(struct stmt_list_struct)));
 
-	cur = _head;
+	auto cur = _head;
 	while (cur->Next) cur = cur->Next;
 	temp->First = _stmt;
 	temp->Next = nullptr;
@@ -122,7 +121,7 @@ struct stmt_list_struct* addToStmtList(struct stmt_list_struct* _head, struct st
 	return _head;
 }
 
-struct stmt_struct* FillIfStmt(struct if_stmt_struct* _ifStmtStruct)
+struct stmt_struct* fill_if_stmt(struct if_stmt_struct* _ifStmtStruct)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -132,7 +131,7 @@ struct stmt_struct* FillIfStmt(struct if_stmt_struct* _ifStmtStruct)
 	return temp;
 }
 
-struct if_stmt_struct* createIfStmt(struct expr_struct* _expr, struct stmt_struct* _stmtTrue,
+struct if_stmt_struct* create_if_stmt(struct expr_struct* _expr, struct stmt_struct* _stmtTrue,
                                     struct stmt_struct* _stmtFalse)
 {
 	auto temp = static_cast<if_stmt_struct*>(malloc(sizeof(struct if_stmt_struct)));
@@ -146,7 +145,7 @@ struct if_stmt_struct* createIfStmt(struct expr_struct* _expr, struct stmt_struc
 	return temp;
 }
 
-struct if_stmt_struct* createElseIfStmt(struct expr_struct* _expr,
+struct if_stmt_struct* create_else_if_stmt(struct expr_struct* _expr,
                                         struct stmt_struct* _stmtTrue,
                                         struct elseif_stmt_list_struct* _elseIfStmtList,
                                         struct stmt_struct* _stmtFalse)
@@ -162,7 +161,7 @@ struct if_stmt_struct* createElseIfStmt(struct expr_struct* _expr,
 	return temp;
 }
 
-struct elseif_stmt_struct* createSimpleElseIfStmt(struct expr_struct* _expr, struct stmt_struct* _stmt)
+struct elseif_stmt_struct* create_simple_else_if_stmt(struct expr_struct* _expr, struct stmt_struct* _stmt)
 {
 	auto temp = static_cast<elseif_stmt_struct*>(malloc(sizeof(struct elseif_stmt_struct)));
 
@@ -173,7 +172,7 @@ struct elseif_stmt_struct* createSimpleElseIfStmt(struct expr_struct* _expr, str
 }
 
 
-struct elseif_stmt_list_struct* createElseIfStmtList(struct elseif_stmt_struct* _stmt)
+struct elseif_stmt_list_struct* create_else_if_stmt_list(struct elseif_stmt_struct* _stmt)
 {
 	auto temp = static_cast<elseif_stmt_list_struct*>(malloc(sizeof(struct elseif_stmt_list_struct)));
 
@@ -183,13 +182,12 @@ struct elseif_stmt_list_struct* createElseIfStmtList(struct elseif_stmt_struct* 
 	return temp;
 }
 
-struct elseif_stmt_list_struct* addToElseIfStmtList(struct elseif_stmt_list_struct* _elseIfHead,
+struct elseif_stmt_list_struct* add_to_else_if_stmt_list(struct elseif_stmt_list_struct* _elseIfHead,
                                                     struct elseif_stmt_struct* _stmt)
 {
-	auto cur = static_cast<elseif_stmt_list_struct*>(malloc(sizeof(struct elseif_stmt_list_struct)));
 	auto temp = static_cast<elseif_stmt_list_struct*>(malloc(sizeof(struct elseif_stmt_list_struct)));
 
-	cur = _elseIfHead;
+	auto cur = _elseIfHead;
 	while (cur->Next) cur = cur->Next;
 	temp->First = _stmt;
 	temp->Next = nullptr;
@@ -198,7 +196,7 @@ struct elseif_stmt_list_struct* addToElseIfStmtList(struct elseif_stmt_list_stru
 	return _elseIfHead;
 }
 
-struct stmt_struct* FillForStmt(struct for_stmt_struct* _forStmt)
+struct stmt_struct* fill_for_stmt(struct for_stmt_struct* _forStmt)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -208,7 +206,7 @@ struct stmt_struct* FillForStmt(struct for_stmt_struct* _forStmt)
 	return temp;
 }
 
-struct for_stmt_struct* createForStmt(struct expr_struct* _initial, struct expr_struct* _condition,
+struct for_stmt_struct* create_for_stmt(struct expr_struct* _initial, struct expr_struct* _condition,
                                       struct expr_struct* _finalExp, struct stmt_struct* _stmt)
 {
 	auto temp = static_cast<for_stmt_struct*>(malloc(sizeof(struct for_stmt_struct)));
@@ -221,7 +219,7 @@ struct for_stmt_struct* createForStmt(struct expr_struct* _initial, struct expr_
 	return temp;
 }
 
-struct stmt_struct* createWhileStmt(struct expr_struct* _condition, struct stmt_struct* _stmt)
+struct stmt_struct* create_while_stmt(struct expr_struct* _condition, struct stmt_struct* _stmt)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -232,7 +230,7 @@ struct stmt_struct* createWhileStmt(struct expr_struct* _condition, struct stmt_
 	return temp;
 }
 
-struct stmt_struct* createDoWhileStmt(struct stmt_struct* _stmt, struct expr_struct* _condition)
+struct stmt_struct* create_do_while_stmt(struct stmt_struct* _stmt, struct expr_struct* _condition)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -243,7 +241,7 @@ struct stmt_struct* createDoWhileStmt(struct stmt_struct* _stmt, struct expr_str
 	return temp;
 }
 
-struct stmt_struct* createConsoleInStmt(struct expr_struct* _expr)
+struct stmt_struct* create_console_in_stmt(struct expr_struct* _expr)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -253,7 +251,7 @@ struct stmt_struct* createConsoleInStmt(struct expr_struct* _expr)
 	return temp;
 }
 
-struct stmt_struct* createConsoleOutStmt(struct expr_struct* _expr)
+struct stmt_struct* create_console_out_stmt(struct expr_struct* _expr)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -275,7 +273,7 @@ struct switch_stmt_struct* createSwitchStmt(struct expr_struct* _expr, struct ca
 	return temp;
 }
 
-struct stmt_struct* fillSwitchStmt(struct switch_stmt_struct* _switchStmt)
+struct stmt_struct* fill_switch_stmt(struct switch_stmt_struct* _switchStmt)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -285,7 +283,7 @@ struct stmt_struct* fillSwitchStmt(struct switch_stmt_struct* _switchStmt)
 	return temp;
 }
 
-struct case_stmt_list_struct* createCaseStmtList(struct case_stmt_struct* _caseStmt)
+struct case_stmt_list_struct* create_case_stmt_list(struct case_stmt_struct* _caseStmt)
 {
 	auto temp = static_cast<case_stmt_list_struct*>(malloc(sizeof(struct case_stmt_list_struct)));
 
@@ -295,12 +293,11 @@ struct case_stmt_list_struct* createCaseStmtList(struct case_stmt_struct* _caseS
 	return temp;
 }
 
-struct case_stmt_list_struct* addToCaseStmtList(struct case_stmt_list_struct* _caseHead, struct case_stmt_struct* _stmt)
+struct case_stmt_list_struct* add_to_case_stmt_list(struct case_stmt_list_struct* _caseHead, struct case_stmt_struct* _stmt)
 {
-	auto cur = static_cast<case_stmt_list_struct*>(malloc(sizeof(struct case_stmt_list_struct)));
 	auto temp = static_cast<case_stmt_list_struct*>(malloc(sizeof(struct case_stmt_list_struct)));
 
-	cur = _caseHead;
+	auto cur = _caseHead;
 	while (cur->Next) cur = cur->Next;
 	temp->First = _stmt;
 	temp->Next = nullptr;
@@ -309,7 +306,7 @@ struct case_stmt_list_struct* addToCaseStmtList(struct case_stmt_list_struct* _c
 	return _caseHead;
 }
 
-struct case_stmt_struct* createCaseStmt(struct expr_struct* _expr, struct stmt_list_struct* _stmtList)
+struct case_stmt_struct* create_case_stmt(struct expr_struct* _expr, struct stmt_list_struct* _stmtList)
 {
 	auto temp = static_cast<case_stmt_struct*>(malloc(sizeof(struct case_stmt_struct)));
 
@@ -320,7 +317,7 @@ struct case_stmt_struct* createCaseStmt(struct expr_struct* _expr, struct stmt_l
 	return temp;
 }
 
-struct default_stmt_struct* createDefaultStmt(struct stmt_list_struct* _stmtList)
+struct default_stmt_struct* create_default_stmt(struct stmt_list_struct* _stmtList)
 {
 	auto temp = static_cast<default_stmt_struct*>(malloc(sizeof(struct default_stmt_struct)));
 
@@ -329,7 +326,7 @@ struct default_stmt_struct* createDefaultStmt(struct stmt_list_struct* _stmtList
 	return temp;
 }
 
-struct stmt_struct* fillForOfStmt(struct forOf_stmt_struct* _forOfStmt)
+struct stmt_struct* fill_for_of_stmt(struct forOf_stmt_struct* _forOfStmt)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -339,7 +336,7 @@ struct stmt_struct* fillForOfStmt(struct forOf_stmt_struct* _forOfStmt)
 	return temp;
 }
 
-struct forOf_stmt_struct* createForOfStmt(struct expr_struct* _expr, struct expr_struct* _exprIterable,
+struct forOf_stmt_struct* create_for_of_stmt(struct expr_struct* _expr, struct expr_struct* _exprIterable,
                                           struct stmt_struct* _stmt)
 {
 	auto temp = static_cast<forOf_stmt_struct*>(malloc(sizeof(struct forOf_stmt_struct)));
@@ -351,7 +348,7 @@ struct forOf_stmt_struct* createForOfStmt(struct expr_struct* _expr, struct expr
 	return temp;
 }
 
-struct stmt_struct* createArray(struct array_handling_struct* _array)
+struct stmt_struct* create_array(struct array_handling_struct* _array)
 {
 	auto temp = static_cast<stmt_struct*>(malloc(sizeof(struct stmt_struct)));
 
@@ -361,7 +358,7 @@ struct stmt_struct* createArray(struct array_handling_struct* _array)
 	return temp;
 }
 
-struct array_handling_struct* createArrayHandlingStmt(struct expr_struct* _expr,
+struct array_handling_struct* create_array_handling_stmt(struct expr_struct* _expr,
                                                       struct expr_list_struct* _arrayElements)
 {
 	auto temp = static_cast<array_handling_struct*>(malloc(sizeof(struct array_handling_struct)));
@@ -372,7 +369,7 @@ struct array_handling_struct* createArrayHandlingStmt(struct expr_struct* _expr,
 	return temp;
 }
 
-struct expr_list_struct* createExprList(struct expr_struct* _expr)
+struct expr_list_struct* create_expr_list(struct expr_struct* _expr)
 {
 	auto temp = static_cast<expr_list_struct*>(malloc(sizeof(struct expr_list_struct)));
 
@@ -383,12 +380,11 @@ struct expr_list_struct* createExprList(struct expr_struct* _expr)
 	return temp;
 }
 
-struct expr_list_struct* addToExprList(struct expr_list_struct* _exprHead, struct expr_struct* _expr)
+struct expr_list_struct* add_to_expr_list(struct expr_list_struct* _exprHead, struct expr_struct* _expr)
 {
-	auto cur = static_cast<expr_list_struct*>(malloc(sizeof(struct expr_list_struct)));
 	auto temp = static_cast<expr_list_struct*>(malloc(sizeof(struct expr_list_struct)));
 
-	cur = _exprHead;
+	auto cur = _exprHead;
 
 	while (cur->NextExpr) cur = cur->NextExpr;
 	temp->expr_value = _expr;
@@ -428,7 +424,7 @@ void write_stmt_list(struct stmt_list_struct* _stmtList,
                      FILE* _filename)
 {
 	char leftOperandPath[256];
-	char dataToAppend[256];
+	
 	char buffer[50];
 
 	if (_parentPath != nullptr)
@@ -526,7 +522,7 @@ void write_stmt(struct stmt_struct* _stmt,
                 char* _parentPath,
                 FILE* _filename)
 {
-	char leftOperandPath[256];
+	char left_operand_path[256];
 	char rightOperandPath[256];
 	char dataToAppend[256];
 	char buffer[50];
@@ -546,16 +542,16 @@ void write_stmt(struct stmt_struct* _stmt,
 		createLabel(_variableCounter, "expr_stmt", dataToAppend);
 		fputs(dataToAppend, _filename);
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 
 		if (_parentPath != nullptr)
-			strcat(leftOperandPath, _parentPath);
+			strcat(left_operand_path, _parentPath);
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->expr_value, left_operand_path, _filename);
 		break;
 	case BLOCK:
 		createLabel(_variableCounter, "block_stmt", dataToAppend);
@@ -569,15 +565,15 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
 		while (_stmt->Block != nullptr)
 		{
-			write_stmt(_stmt->Block->First, leftOperandPath, _filename);
+			write_stmt(_stmt->Block->First, left_operand_path, _filename);
 			_stmt->Block = _stmt->Block->Next;
 		}
 		break;
@@ -593,16 +589,16 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->array->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->array->expr_value, left_operand_path, _filename);
 		_variableCounter++;
-		write_expr_list(_stmt->array->ArrayElements, leftOperandPath, _filename);
+		write_expr_list(_stmt->array->ArrayElements, left_operand_path, _filename);
 		break;
 	case If:
 		createLabel(_variableCounter, "if_stmt", dataToAppend);
@@ -616,38 +612,38 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->IfStmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->IfStmt->expr_value, left_operand_path, _filename);
 		_variableCounter++;
-		write_stmt(_stmt->IfStmt->trueBranch, leftOperandPath, _filename);
+		write_stmt(_stmt->IfStmt->trueBranch, left_operand_path, _filename);
 
-		strcpy(rightOperandPath, leftOperandPath);
+		strcpy(rightOperandPath, left_operand_path);
 		if (_stmt->IfStmt->elseIfBranchs != nullptr)
 		{
 			_variableCounter++;
 			createLabel(_variableCounter, "elseif_block", dataToAppend);
 			fputs(dataToAppend, _filename);
 
-			if (leftOperandPath != nullptr)
+			if (left_operand_path != nullptr)
 			{
-				fputs(leftOperandPath, _filename);
+				fputs(left_operand_path, _filename);
 				sprintf(buffer, "%d", _variableCounter);
 				fputs(buffer, _filename);
 				fputs(";\n", _filename);
 			}
 
-			sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
-			sprintf(leftOperandPath, "%d", _variableCounter);
-			strcat(leftOperandPath, "->");
+			sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
+			sprintf(left_operand_path, "%d", _variableCounter);
+			strcat(left_operand_path, "->");
 
 			_variableCounter++;
-			write_elseif_stmt_list(_stmt->IfStmt->elseIfBranchs, leftOperandPath, _filename);
+			write_elseif_stmt_list(_stmt->IfStmt->elseIfBranchs, left_operand_path, _filename);
 		}
 		if (_stmt->IfStmt->falseBranch != nullptr)
 		{
@@ -667,15 +663,15 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->expr_value, left_operand_path, _filename);
 		_variableCounter++;
-		write_stmt(_stmt->Stmt, leftOperandPath, _filename);
+		write_stmt(_stmt->Stmt, left_operand_path, _filename);
 		break;
 	case For:
 		createLabel(_variableCounter, "for_stmt", dataToAppend);
@@ -689,19 +685,19 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->ForStmt->Initial, leftOperandPath, _filename);
+		write_expr(_stmt->ForStmt->Initial, left_operand_path, _filename);
 		_variableCounter++;
-		write_expr(_stmt->ForStmt->Condition, leftOperandPath, _filename);
+		write_expr(_stmt->ForStmt->Condition, left_operand_path, _filename);
 		_variableCounter++;
-		write_expr(_stmt->ForStmt->Final_expr, leftOperandPath, _filename);
+		write_expr(_stmt->ForStmt->Final_expr, left_operand_path, _filename);
 		_variableCounter++;
-		write_stmt(_stmt->ForStmt->Stmt, leftOperandPath, _filename);
+		write_stmt(_stmt->ForStmt->Stmt, left_operand_path, _filename);
 		break;
 	case doWhile:
 		createLabel(_variableCounter, "doWhile_stmt", dataToAppend);
@@ -715,15 +711,15 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->expr_value, left_operand_path, _filename);
 		_variableCounter++;
-		write_stmt(_stmt->Stmt, leftOperandPath, _filename);
+		write_stmt(_stmt->Stmt, left_operand_path, _filename);
 		break;
 	case Switch:
 		createLabel(_variableCounter, "Swtich_stmt", dataToAppend);
@@ -737,18 +733,18 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->SwitchStmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->SwitchStmt->expr_value, left_operand_path, _filename);
 
 		if (_stmt->SwitchStmt->CasesStmtList != nullptr)
 		{
 			_variableCounter++;
-			write_case_stmt_list(_stmt->SwitchStmt->CasesStmtList, leftOperandPath, _filename);
+			write_case_stmt_list(_stmt->SwitchStmt->CasesStmtList, left_operand_path, _filename);
 		}
 		if (_stmt->SwitchStmt->DefaultStmt != nullptr)
 		{
@@ -756,7 +752,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			createLabel(_variableCounter, "default_block", dataToAppend);
 			fputs(dataToAppend, _filename);
 
-			write_stmt_list(_stmt->SwitchStmt->DefaultStmt->StmtList, leftOperandPath, _filename);
+			write_stmt_list(_stmt->SwitchStmt->DefaultStmt->StmtList, left_operand_path, _filename);
 		}
 		break;
 	case ForOf:
@@ -771,17 +767,17 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->ForOfStmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->ForOfStmt->expr_value, left_operand_path, _filename);
 		_variableCounter++;
-		write_expr(_stmt->ForOfStmt->ExprIterable, leftOperandPath, _filename);
+		write_expr(_stmt->ForOfStmt->ExprIterable, left_operand_path, _filename);
 		_variableCounter++;
-		write_stmt(_stmt->ForOfStmt->Stmt, leftOperandPath, _filename);
+		write_stmt(_stmt->ForOfStmt->Stmt, left_operand_path, _filename);
 		break;
 	case consoleIn:
 		createLabel(_variableCounter, "consoleIn", dataToAppend);
@@ -795,13 +791,13 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->expr_value, left_operand_path, _filename);
 		break;
 	case consoleOut:
 		createLabel(_variableCounter, "consoleOut", dataToAppend);
@@ -815,14 +811,15 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(left_operand_path, "%s", ""); // to empty the leftOperandPath
 		sprintf(buffer, "%d", _variableCounter);
-		strcat(leftOperandPath, buffer);
-		strcat(leftOperandPath, "->");
+		strcat(left_operand_path, buffer);
+		strcat(left_operand_path, "->");
 
 		_variableCounter++;
-		write_expr(_stmt->expr_value, leftOperandPath, _filename);
+		write_expr(_stmt->expr_value, left_operand_path, _filename);
 		break;
+	case ElseIf: break;
 	}
 }
 
@@ -830,8 +827,7 @@ void write_expr(struct expr_struct* _expr,
                 char* _parentPath,
                 FILE* _filename)
 {
-	char leftOperandPath[256];
-	char rightOperandPath[256];
+	
 	char dataToAppend[256];
 	char buffer[50];
 
@@ -854,7 +850,7 @@ void write_expr(struct expr_struct* _expr,
 		_variableCounter++;
 		break;
 	case Float:
-		sprintf(buffer, "%f", _expr->Float);
+		sprintf(buffer, "%f", _expr->Float);  
 		createLabel(_variableCounter, buffer, dataToAppend);
 
 		strcat(dataToAppend, _parentPath);
