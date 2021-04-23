@@ -4,7 +4,7 @@
 #include <malloc.h>
 #include <conio.h>
 #include <string.h>
-#include "semantic.h"
+#include "print_tree.h"
 
 extern FILE* yyin;
 %}
@@ -105,9 +105,9 @@ exp:   DIGIT						{printf("DIGIT is printed\n"); $$ = create_digit_expr($1);}
 	| '(' exp ')' 					{printf("\'(\' exp \')\' worked\n"); $$ = $2;}
 	| exp '+' exp 					{printf("exp + exp  worked\n");$$ = create_binary_operation_expr(Plus, $1 , $3);}
 	| exp '-' exp 					{printf("exp - exp  worked\n");$$ = create_binary_operation_expr(Minus, $1 , $3);}	
-	| exp '*' exp 					{printf("exp * exp  worked\n");$$ = create_binary_operation_expr(Mul, $1 , $3);}
-	| exp '/' exp 					{printf("exp / exp  worked\n");$$ = create_binary_operation_expr(Div, $1 , $3);}
-	| exp '%' exp					{printf("exp Remi exp  worked\n");$$ = create_binary_operation_expr(Remi, $1 , $3);}
+	| exp '*' exp 					{printf("exp * exp  worked\n");$$ = create_binary_operation_expr(Multiplication, $1 , $3);}
+	| exp '/' exp 					{printf("exp / exp  worked\n");$$ = create_binary_operation_expr(Division, $1 , $3);}
+	| exp '%' exp					{printf("exp Remi exp  worked\n");$$ = create_binary_operation_expr(Reminder, $1 , $3);}
 	| exp EQUAL exp 				{printf("exp EQUAL exp  worked\n");$$ = create_binary_operation_expr(EQ, $1 , $3);}
 	| exp STRICT_EQUAL exp  		{printf("exp STRICT_EQUAL exp  worked\n");$$ = create_binary_operation_expr(SEQ, $1 , $3);}
 	| exp NOT_EQUAL exp 			{printf("exp NOT_EQUAL exp  worked\n");$$ = create_binary_operation_expr(NEQ, $1 , $3);}
@@ -120,8 +120,8 @@ exp:   DIGIT						{printf("DIGIT is printed\n"); $$ = create_digit_expr($1);}
 	| exp OR exp 					{printf("exp OR exp  worked\n");$$ = create_binary_operation_expr(Or, $1 , $3);}
 	| exp AND exp 					{printf("exp AND exp  worked\n");$$ = create_binary_operation_expr(And, $1 , $3);}
 	| NOT exp						{printf("NOT exp  worked\n");$$ = create_unary_operation_expr(Not, $2 );}
-	| '+' exp %prec UPLUS			{printf(" + exp  worked\n");$$ = create_unary_operation_expr(Uplu, $2 );}
-	| '-' exp %prec UMINUS 		{printf(" - exp  worked\n");$$ = create_unary_operation_expr(Umin, $2 );}	;
+	| '+' exp %prec UPLUS			{printf(" + exp  worked\n");$$ = create_unary_operation_expr(unary_plus, $2 );}
+	| '-' exp %prec UMINUS 		{printf(" - exp  worked\n");$$ = create_unary_operation_expr(unary_minus, $2 );}	;
 	
 stmt:  SEMICOLON  newline_seq_opt						{printf("empty stmt \n"); $$=create_stmt_null();}
 	| BREAK SEMICOLON newline_seq_opt 		 			{printf("create break stmt\n"); $$=create_stmt_break();}
@@ -130,18 +130,18 @@ stmt:  SEMICOLON  newline_seq_opt						{printf("empty stmt \n"); $$=create_stmt_
 	| exp newline_seq          							{$$ = create_stmt($1);}
 	| '{' newline_seq_opt stmt_list '}' newline_seq_opt	{$$ = create_block_stmt($3);}
     | array_handling 									{$$= create_array($1); }     
-	| if_stmt 											{$$= FillIfStmt($1);}
-	| for_stmt											{$$= FillForStmt($1); }
+	| if_stmt 											{$$= fill_if_stmt($1);}
+	| for_stmt											{$$= fill_for_stmt($1); }
 	| while_stmt										{$$= $1; }
 	| do_while_stmt										{$$= $1; }
-	| switch_stmt										{printf("fillSwitchStmt worked\n");$$= fillSwitchStmt($1);}
-	| for_of											{$$= fillForOfStmt($1); }
+	| switch_stmt										{printf("fill_switch_stmt worked\n");$$= fill_switch_stmt($1);}
+	| for_of											{$$= fill_for_of_stmt($1); }
 	| input										{$$= $1; }
 	| output										{$$= $1; }	;
 	
 
 stmt_list: 	stmt 				{printf("stmt is created\n");$$ = create_stmt_list($1);}		 
-		| stmt_list stmt		{printf("addToStmtList is preformed\n");$$ = addToStmtList($1, $2);}	;
+		| stmt_list stmt		{printf("add_to_stmt_list is preformed\n");$$ = add_to_stmt_list($1, $2);}	;
 
 type: LET | VAR	| CONST	;
 if_stmt: IF newline_seq_opt '('  exp ')' stmt									
@@ -154,7 +154,7 @@ if_stmt: IF newline_seq_opt '('  exp ')' stmt
 				{printf("If, ElseIf and Else is worked"); $$ = create_else_if_stmt($4, $6, $7, $9);};
 		
 elseif_stmt_list: elseif_stmt  					{$$ = create_else_if_stmt_list($1);}
-		| elseif_stmt_list  elseif_stmt 		{$$ = addToElseIfStmtList($1, $2);}	;
+		| elseif_stmt_list  elseif_stmt 		{$$ = add_to_else_if_stmt_list($1, $2);}	;
 
 elseif_stmt: ELSEIF '(' exp ')' newline_seq_opt stmt            {$$ = create_simple_else_if_stmt($3,$6);};
  		
@@ -170,7 +170,7 @@ switch_stmt: SWITCH '(' exp ')' '{' newline_seq_opt  case_stmt_list  '}' newline
 								{printf("create_switch_stmt is worked\n"); $$ = create_switch_stmt($3, $7,$8); }; 
 
 case_stmt_list: case_stmt                       {printf("create_case_stmt_list is worked\n");$$ = create_case_stmt_list($1);}
-			| case_stmt_list case_stmt			{printf("addToCaseStmtList is worked\n");$$ = addToCaseStmtList($1, $2);};
+			| case_stmt_list case_stmt			{printf("add_to_case_stmt_list is worked\n");$$ = add_to_case_stmt_list($1, $2);};
 				
 case_stmt: CASE exp ':'	newline_seq_opt							
 						{printf("newline_seq_opt is worked\n");$$ = create_case_stmt($2, NULL);}
@@ -185,7 +185,7 @@ for_of : FOR '(' exp OF exp ')'  stmt  {$$ = create_for_of_stmt($3, $5, $7);};
 array_handling: exp ASSIGNMENT '[' expr_list ']' SEMICOLON NEWLINE {$$ = create_array_handling_stmt($1, $4);};
 
 expr_list: exp					 {printf("expr is created\n");$$ = create_expr_list($1);}
-		 | expr_list ',' exp     {printf("addToExpr is preformed\n");$$ = addToExprList($1, $3);};
+		 | expr_list ',' exp     {printf("addToExpr is preformed\n");$$ = add_to_expr_list($1, $3);};
 
 input: INPUT '(' exp  ')' SEMICOLON newline_seq_opt 	{$$ = create_console_in_stmt($3);}
 		  | INPUT '(' exp  ')'  newline_seq			 	{$$ = create_console_in_stmt($3);};   
