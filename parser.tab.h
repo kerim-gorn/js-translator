@@ -80,8 +80,8 @@ extern int yydebug;
     BREAK = 281,                   /* BREAK  */
     DEFAULT = 282,                 /* DEFAULT  */
     OF = 283,                      /* OF  */
-    CONSOLE_IN = 284,              /* CONSOLE_IN  */
-    CONSOLE_OUT = 285,             /* CONSOLE_OUT  */
+    INPUT = 284,                   /* INPUT  */
+    OUTPUT = 285,                  /* OUTPUT  */
     SEMICOLON = 286,               /* SEMICOLON  */
     NEWLINE = 287,                 /* NEWLINE  */
     LET = 288,                     /* LET  */

@@ -135,8 +135,8 @@ enum yysymbol_kind_t
   YYSYMBOL_BREAK = 26,                     /* BREAK  */
   YYSYMBOL_DEFAULT = 27,                   /* DEFAULT  */
   YYSYMBOL_OF = 28,                        /* OF  */
-  YYSYMBOL_CONSOLE_IN = 29,                /* CONSOLE_IN  */
-  YYSYMBOL_CONSOLE_OUT = 30,               /* CONSOLE_OUT  */
+  YYSYMBOL_INPUT = 29,                     /* INPUT  */
+  YYSYMBOL_OUTPUT = 30,                    /* OUTPUT  */
   YYSYMBOL_SEMICOLON = 31,                 /* SEMICOLON  */
   YYSYMBOL_NEWLINE = 32,                   /* NEWLINE  */
   YYSYMBOL_LET = 33,                       /* LET  */
@@ -181,8 +181,8 @@ enum yysymbol_kind_t
   YYSYMBOL_for_of = 72,                    /* for_of  */
   YYSYMBOL_array_handling = 73,            /* array_handling  */
   YYSYMBOL_expr_list = 74,                 /* expr_list  */
-  YYSYMBOL_console_in = 75,                /* console_in  */
-  YYSYMBOL_console_out = 76                /* console_out  */
+  YYSYMBOL_input = 75,                     /* input  */
+  YYSYMBOL_output = 76                     /* output  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -554,14 +554,14 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    96,    96,    99,   100,   101,   102,   103,   104,   105,
-     106,   107,   108,   109,   110,   111,   112,   113,   114,   115,
-     116,   117,   118,   119,   120,   121,   122,   123,   124,   125,
-     129,   130,   131,   132,   133,   134,   135,   136,   137,   138,
-     139,   140,   141,   142,   143,   147,   148,   151,   152,   153,
-     155,   156,   157,   158,   161,   162,   164,   167,   170,   173,
-     177,   178,   182,   183,   186,   187,   191,   195,   197,   198,
-     200,   203,   206,   207,   211,   212,   215,   216
+       0,    96,    96,    98,    99,   100,   101,   102,   103,   104,
+     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     126,   127,   128,   129,   130,   131,   132,   133,   134,   135,
+     136,   137,   138,   139,   140,   143,   144,   146,   146,   146,
+     147,   149,   151,   153,   156,   157,   159,   161,   163,   165,
+     167,   169,   172,   173,   175,   177,   179,   181,   182,   182,
+     183,   185,   187,   188,   190,   191,   193,   194
 };
 #endif
 
@@ -581,15 +581,15 @@ static const char *const yytname[] =
   "ID", "STRINGONEQOUTED", "STRINGDOUBLEQUOTED", "EQUAL", "STRICT_EQUAL",
   "NOT_EQUAL", "BIGGER_EQUAL", "SMALLER_EQUAL", "ASSIGNMENT", "\"**\"",
   "OR", "NOT", "AND", "IF", "ELSE", "ELSEIF", "FOR", "WHILE", "DO",
-  "SWITCH", "CASE", "BREAK", "DEFAULT", "OF", "CONSOLE_IN", "CONSOLE_OUT",
+  "SWITCH", "CASE", "BREAK", "DEFAULT", "OF", "INPUT", "OUTPUT",
   "SEMICOLON", "NEWLINE", "LET", "VAR", "CONST", "FINAL", "'>'", "'<'",
   "'+'", "'-'", "'*'", "'/'", "'%'", "UMINUS", "UPLUS", "'['", "']'",
   "')'", "'('", "'{'", "'}'", "':'", "','", "$accept", "program", "exp",
   "stmt", "stmt_list", "type", "if_stmt", "elseif_stmt_list",
   "elseif_stmt", "for_stmt", "while_stmt", "do_while_stmt", "switch_stmt",
   "case_stmt_list", "case_stmt", "default_stmt", "newline_seq",
-  "newline_seq_opt", "for_of", "array_handling", "expr_list", "console_in",
-  "console_out", YY_NULLPTR
+  "newline_seq_opt", "for_of", "array_handling", "expr_list", "input",
+  "output", YY_NULLPTR
 };
 
 static const char *
@@ -1650,415 +1650,415 @@ yyreduce:
     break;
 
   case 3: /* exp: DIGIT  */
-#line 99 "parser.y"
+#line 98 "parser.y"
                                                         {printf("DIGIT is printed\n"); (yyval.expr_value) = createDigitExpr((yyvsp[0].Int_val));}
 #line 1656 "parser.tab.cpp"
     break;
 
   case 4: /* exp: FLOAT_DIGIT  */
-#line 100 "parser.y"
+#line 99 "parser.y"
                                                         {printf("FLOAT_DIGIT is printed\n");(yyval.expr_value) = createFloatExpr((yyvsp[0].Float));}
 #line 1662 "parser.tab.cpp"
     break;
 
   case 5: /* exp: type ID  */
-#line 101 "parser.y"
+#line 100 "parser.y"
                                                         {printf("ID is printed\n");(yyval.expr_value) = createVariableExpr((yyvsp[0].Id));}
 #line 1668 "parser.tab.cpp"
     break;
 
   case 6: /* exp: ID  */
-#line 102 "parser.y"
+#line 101 "parser.y"
                                                             {printf("ID is printed\n");(yyval.expr_value) = createVariableExpr((yyvsp[0].Id));}
 #line 1674 "parser.tab.cpp"
     break;
 
   case 7: /* exp: STRINGONEQOUTED  */
-#line 103 "parser.y"
+#line 102 "parser.y"
                                                 {printf("STRINGONEQOUTED is printed\n");(yyval.expr_value) = createVariableExpr((yyvsp[0].Id));}
 #line 1680 "parser.tab.cpp"
     break;
 
   case 8: /* exp: STRINGDOUBLEQUOTED  */
-#line 104 "parser.y"
+#line 103 "parser.y"
                                                 {printf("STRINGDOUBLEQUOTED is printed\n");(yyval.expr_value) = createVariableExpr((yyvsp[0].Id));}
 #line 1686 "parser.tab.cpp"
     break;
 
   case 9: /* exp: exp '[' exp ']'  */
-#line 105 "parser.y"
+#line 104 "parser.y"
                                                         {printf("exp \'[\' exp \']\' worked\n"); (yyval.expr_value) = createBinaryOpeartionExpr(array_element_access, (yyvsp[-3].expr_value), (yyvsp[-1].expr_value));}
 #line 1692 "parser.tab.cpp"
     break;
 
   case 10: /* exp: '(' exp ')'  */
-#line 106 "parser.y"
+#line 105 "parser.y"
                                                         {printf("\'(\' exp \')\' worked\n"); (yyval.expr_value) = (yyvsp[-1].expr_value);}
 #line 1698 "parser.tab.cpp"
     break;
 
   case 11: /* exp: exp '+' exp  */
-#line 107 "parser.y"
+#line 106 "parser.y"
                                                         {printf("exp + exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Plus, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1704 "parser.tab.cpp"
     break;
 
   case 12: /* exp: exp '-' exp  */
-#line 108 "parser.y"
+#line 107 "parser.y"
                                                         {printf("exp - exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Minus, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1710 "parser.tab.cpp"
     break;
 
   case 13: /* exp: exp '*' exp  */
-#line 109 "parser.y"
+#line 108 "parser.y"
                                                         {printf("exp * exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Mul, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1716 "parser.tab.cpp"
     break;
 
   case 14: /* exp: exp '/' exp  */
-#line 110 "parser.y"
+#line 109 "parser.y"
                                                         {printf("exp / exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Div, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1722 "parser.tab.cpp"
     break;
 
   case 15: /* exp: exp '%' exp  */
-#line 111 "parser.y"
+#line 110 "parser.y"
                                                         {printf("exp Remi exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Remi, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1728 "parser.tab.cpp"
     break;
 
   case 16: /* exp: exp EQUAL exp  */
-#line 112 "parser.y"
+#line 111 "parser.y"
                                                         {printf("exp EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(EQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1734 "parser.tab.cpp"
     break;
 
   case 17: /* exp: exp STRICT_EQUAL exp  */
-#line 113 "parser.y"
+#line 112 "parser.y"
                                                 {printf("exp STRICT_EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(SEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1740 "parser.tab.cpp"
     break;
 
   case 18: /* exp: exp NOT_EQUAL exp  */
-#line 114 "parser.y"
+#line 113 "parser.y"
                                                 {printf("exp NOT_EQUAL exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(NEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1746 "parser.tab.cpp"
     break;
 
   case 19: /* exp: exp '>' exp  */
-#line 115 "parser.y"
+#line 114 "parser.y"
                                                         {printf("exp > exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(GR, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1752 "parser.tab.cpp"
     break;
 
   case 20: /* exp: exp '<' exp  */
-#line 116 "parser.y"
+#line 115 "parser.y"
                                                         {printf("exp < exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(SM, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1758 "parser.tab.cpp"
     break;
 
   case 21: /* exp: exp BIGGER_EQUAL exp  */
-#line 117 "parser.y"
+#line 116 "parser.y"
                                                 {printf("exp >= exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(GREQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1764 "parser.tab.cpp"
     break;
 
   case 22: /* exp: exp SMALLER_EQUAL exp  */
-#line 118 "parser.y"
+#line 117 "parser.y"
                                                 {printf("exp <= exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(SMEQ, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1770 "parser.tab.cpp"
     break;
 
   case 23: /* exp: exp ASSIGNMENT exp  */
-#line 119 "parser.y"
+#line 118 "parser.y"
                                                 {printf("exp = exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Assign, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1776 "parser.tab.cpp"
     break;
 
   case 24: /* exp: exp "**" exp  */
-#line 120 "parser.y"
+#line 119 "parser.y"
                                                         {printf("exp POW exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Pow, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1782 "parser.tab.cpp"
     break;
 
   case 25: /* exp: exp OR exp  */
-#line 121 "parser.y"
+#line 120 "parser.y"
                                                         {printf("exp OR exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(Or, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1788 "parser.tab.cpp"
     break;
 
   case 26: /* exp: exp AND exp  */
-#line 122 "parser.y"
+#line 121 "parser.y"
                                                         {printf("exp AND exp  worked\n");(yyval.expr_value) = createBinaryOpeartionExpr(And, (yyvsp[-2].expr_value) , (yyvsp[0].expr_value));}
 #line 1794 "parser.tab.cpp"
     break;
 
   case 27: /* exp: NOT exp  */
-#line 123 "parser.y"
+#line 122 "parser.y"
                                                                 {printf("NOT exp  worked\n");(yyval.expr_value) = createUnaryOpeartionExpr(Not, (yyvsp[0].expr_value) );}
 #line 1800 "parser.tab.cpp"
     break;
 
   case 28: /* exp: '+' exp  */
-#line 124 "parser.y"
+#line 123 "parser.y"
                                                 {printf(" + exp  worked\n");(yyval.expr_value) = createUnaryOpeartionExpr(Uplu, (yyvsp[0].expr_value) );}
 #line 1806 "parser.tab.cpp"
     break;
 
   case 29: /* exp: '-' exp  */
-#line 125 "parser.y"
+#line 124 "parser.y"
                                         {printf(" - exp  worked\n");(yyval.expr_value) = createUnaryOpeartionExpr(Umin, (yyvsp[0].expr_value) );}
 #line 1812 "parser.tab.cpp"
     break;
 
   case 30: /* stmt: SEMICOLON newline_seq_opt  */
-#line 129 "parser.y"
-                                                                                        {printf("empty stmt \n"); (yyval.stmt_value)=createStmtNull();}
+#line 126 "parser.y"
+                                                                                {printf("empty stmt \n"); (yyval.stmt_value)=createStmtNull();}
 #line 1818 "parser.tab.cpp"
     break;
 
   case 31: /* stmt: BREAK SEMICOLON newline_seq_opt  */
-#line 130 "parser.y"
+#line 127 "parser.y"
                                                                                 {printf("create break stmt\n"); (yyval.stmt_value)=createStmtBreak();}
 #line 1824 "parser.tab.cpp"
     break;
 
   case 32: /* stmt: BREAK newline_seq  */
-#line 131 "parser.y"
+#line 128 "parser.y"
                                                                                                 {printf("create break stmt\n"); (yyval.stmt_value)=createStmtBreak();}
 #line 1830 "parser.tab.cpp"
     break;
 
   case 33: /* stmt: exp SEMICOLON newline_seq_opt  */
-#line 132 "parser.y"
+#line 129 "parser.y"
                                                                 {(yyval.stmt_value) = createStmt((yyvsp[-2].expr_value));}
 #line 1836 "parser.tab.cpp"
     break;
 
   case 34: /* stmt: exp newline_seq  */
-#line 133 "parser.y"
+#line 130 "parser.y"
                                                                                         {(yyval.stmt_value) = createStmt((yyvsp[-1].expr_value));}
 #line 1842 "parser.tab.cpp"
     break;
 
   case 35: /* stmt: '{' newline_seq_opt stmt_list '}' newline_seq_opt  */
-#line 134 "parser.y"
-                                                                                                {(yyval.stmt_value) = createBlockStmt((yyvsp[-2].stmt_list_value));}
+#line 131 "parser.y"
+                                                                {(yyval.stmt_value) = createBlockStmt((yyvsp[-2].stmt_list_value));}
 #line 1848 "parser.tab.cpp"
     break;
 
   case 36: /* stmt: array_handling  */
-#line 135 "parser.y"
+#line 132 "parser.y"
                                                                                         {(yyval.stmt_value)= createArray((yyvsp[0].array_handling_value)); }
 #line 1854 "parser.tab.cpp"
     break;
 
   case 37: /* stmt: if_stmt  */
-#line 136 "parser.y"
+#line 133 "parser.y"
                                                                                                         {(yyval.stmt_value)= FillIfStmt((yyvsp[0].if_stmt_value));}
 #line 1860 "parser.tab.cpp"
     break;
 
   case 38: /* stmt: for_stmt  */
-#line 137 "parser.y"
+#line 134 "parser.y"
                                                                                                         {(yyval.stmt_value)= FillForStmt((yyvsp[0].for_stmt_value)); }
 #line 1866 "parser.tab.cpp"
     break;
 
   case 39: /* stmt: while_stmt  */
-#line 138 "parser.y"
+#line 135 "parser.y"
                                                                                                 {(yyval.stmt_value)= (yyvsp[0].stmt_value); }
 #line 1872 "parser.tab.cpp"
     break;
 
   case 40: /* stmt: do_while_stmt  */
-#line 139 "parser.y"
+#line 136 "parser.y"
                                                                                                 {(yyval.stmt_value)= (yyvsp[0].stmt_value); }
 #line 1878 "parser.tab.cpp"
     break;
 
   case 41: /* stmt: switch_stmt  */
-#line 140 "parser.y"
-                                                                                        {printf("                     fillSwitchStmt worked\n");(yyval.stmt_value)= fillSwitchStmt((yyvsp[0].switch_stmt_value));}
+#line 137 "parser.y"
+                                                                                                {printf("fillSwitchStmt worked\n");(yyval.stmt_value)= fillSwitchStmt((yyvsp[0].switch_stmt_value));}
 #line 1884 "parser.tab.cpp"
     break;
 
   case 42: /* stmt: for_of  */
-#line 141 "parser.y"
+#line 138 "parser.y"
                                                                                                         {(yyval.stmt_value)= fillForOfStmt((yyvsp[0].forOf_stmt_value)); }
 #line 1890 "parser.tab.cpp"
     break;
 
-  case 43: /* stmt: console_in  */
-#line 142 "parser.y"
-                                                                                                {(yyval.stmt_value)= (yyvsp[0].stmt_value); }
+  case 43: /* stmt: input  */
+#line 139 "parser.y"
+                                                                                        {(yyval.stmt_value)= (yyvsp[0].stmt_value); }
 #line 1896 "parser.tab.cpp"
     break;
 
-  case 44: /* stmt: console_out  */
-#line 143 "parser.y"
+  case 44: /* stmt: output  */
+#line 140 "parser.y"
                                                                                                 {(yyval.stmt_value)= (yyvsp[0].stmt_value); }
 #line 1902 "parser.tab.cpp"
     break;
 
   case 45: /* stmt_list: stmt  */
-#line 147 "parser.y"
-                                                {printf("                 stmt is created\n");(yyval.stmt_list_value) = createStmtList((yyvsp[0].stmt_value));}
+#line 143 "parser.y"
+                                                {printf("stmt is created\n");(yyval.stmt_list_value) = createStmtList((yyvsp[0].stmt_value));}
 #line 1908 "parser.tab.cpp"
     break;
 
   case 46: /* stmt_list: stmt_list stmt  */
-#line 148 "parser.y"
-                                                {printf("                 addToStmtList is preformed\n");(yyval.stmt_list_value) = addToStmtList((yyvsp[-1].stmt_list_value), (yyvsp[0].stmt_value));}
+#line 144 "parser.y"
+                                                {printf("addToStmtList is preformed\n");(yyval.stmt_list_value) = addToStmtList((yyvsp[-1].stmt_list_value), (yyvsp[0].stmt_value));}
 #line 1914 "parser.tab.cpp"
     break;
 
   case 50: /* if_stmt: IF newline_seq_opt '(' exp ')' stmt  */
-#line 155 "parser.y"
-                                                                                                                {printf("                    IfStmt is worked\n"); (yyval.if_stmt_value) = createIfStmt((yyvsp[-2].expr_value), (yyvsp[0].stmt_value), NULL);}
+#line 148 "parser.y"
+                                {printf("IfStmt is worked\n"); (yyval.if_stmt_value) = createIfStmt((yyvsp[-2].expr_value), (yyvsp[0].stmt_value), NULL);}
 #line 1920 "parser.tab.cpp"
     break;
 
   case 51: /* if_stmt: IF newline_seq_opt '(' exp ')' stmt ELSE stmt  */
-#line 156 "parser.y"
-                                                                                                                {printf("                    IfElseStmt is worked\n"); (yyval.if_stmt_value) = createIfStmt((yyvsp[-4].expr_value), (yyvsp[-2].stmt_value), (yyvsp[0].stmt_value));}
+#line 150 "parser.y"
+                                {printf("IfElseStmt is worked\n"); (yyval.if_stmt_value) = createIfStmt((yyvsp[-4].expr_value), (yyvsp[-2].stmt_value), (yyvsp[0].stmt_value));}
 #line 1926 "parser.tab.cpp"
     break;
 
   case 52: /* if_stmt: IF newline_seq_opt '(' exp ')' stmt elseif_stmt_list  */
-#line 157 "parser.y"
-                                                                                                        {printf("                    If and ElseIf is worked\n"); (yyval.if_stmt_value) = createElseIfStmt((yyvsp[-3].expr_value), (yyvsp[-1].stmt_value), (yyvsp[0].elseif_stmt_list_value),NULL);}
+#line 152 "parser.y"
+                                {printf("If and ElseIf is worked\n"); (yyval.if_stmt_value) = createElseIfStmt((yyvsp[-3].expr_value), (yyvsp[-1].stmt_value), (yyvsp[0].elseif_stmt_list_value),NULL);}
 #line 1932 "parser.tab.cpp"
     break;
 
   case 53: /* if_stmt: IF newline_seq_opt '(' exp ')' stmt elseif_stmt_list ELSE stmt  */
-#line 158 "parser.y"
-                                                                                                {printf("                    If, ElseIf and Else is worked"); (yyval.if_stmt_value) = createElseIfStmt((yyvsp[-5].expr_value), (yyvsp[-3].stmt_value), (yyvsp[-2].elseif_stmt_list_value), (yyvsp[0].stmt_value));}
+#line 154 "parser.y"
+                                {printf("If, ElseIf and Else is worked"); (yyval.if_stmt_value) = createElseIfStmt((yyvsp[-5].expr_value), (yyvsp[-3].stmt_value), (yyvsp[-2].elseif_stmt_list_value), (yyvsp[0].stmt_value));}
 #line 1938 "parser.tab.cpp"
     break;
 
   case 54: /* elseif_stmt_list: elseif_stmt  */
-#line 161 "parser.y"
+#line 156 "parser.y"
                                                                 {(yyval.elseif_stmt_list_value) = createElseIfStmtList((yyvsp[0].elseif_stmt_value));}
 #line 1944 "parser.tab.cpp"
     break;
 
   case 55: /* elseif_stmt_list: elseif_stmt_list elseif_stmt  */
-#line 162 "parser.y"
+#line 157 "parser.y"
                                                                 {(yyval.elseif_stmt_list_value) = addToElseIfStmtList((yyvsp[-1].elseif_stmt_list_value), (yyvsp[0].elseif_stmt_value));}
 #line 1950 "parser.tab.cpp"
     break;
 
   case 56: /* elseif_stmt: ELSEIF '(' exp ')' newline_seq_opt stmt  */
-#line 164 "parser.y"
+#line 159 "parser.y"
                                                                 {(yyval.elseif_stmt_value) = createSimpleElseIfStmt((yyvsp[-3].expr_value),(yyvsp[0].stmt_value));}
 #line 1956 "parser.tab.cpp"
     break;
 
   case 57: /* for_stmt: FOR '(' exp SEMICOLON exp SEMICOLON exp ')' stmt  */
-#line 167 "parser.y"
+#line 161 "parser.y"
                                                            {(yyval.for_stmt_value) = createForStmt((yyvsp[-6].expr_value), (yyvsp[-4].expr_value), (yyvsp[-2].expr_value), (yyvsp[0].stmt_value));}
 #line 1962 "parser.tab.cpp"
     break;
 
   case 58: /* while_stmt: WHILE '(' exp ')' stmt  */
-#line 170 "parser.y"
+#line 163 "parser.y"
                                       {(yyval.stmt_value) = createWhileStmt((yyvsp[-2].expr_value), (yyvsp[0].stmt_value));}
 #line 1968 "parser.tab.cpp"
     break;
 
   case 59: /* do_while_stmt: DO stmt WHILE '(' exp ')' SEMICOLON newline_seq_opt  */
-#line 173 "parser.y"
+#line 165 "parser.y"
                                                                     {(yyval.stmt_value) = createDoWhileStmt((yyvsp[-6].stmt_value), (yyvsp[-3].expr_value));}
 #line 1974 "parser.tab.cpp"
     break;
 
   case 60: /* switch_stmt: SWITCH '(' exp ')' '{' newline_seq_opt case_stmt_list '}' newline_seq_opt  */
-#line 177 "parser.y"
-                                                                                                                                 {printf("          createSwitchStmt is worked\n"); (yyval.switch_stmt_value) = createSwitchStmt((yyvsp[-6].expr_value), (yyvsp[-2].case_stmt_list_value),NULL); }
+#line 168 "parser.y"
+                                                                {printf("createSwitchStmt is worked\n"); (yyval.switch_stmt_value) = createSwitchStmt((yyvsp[-6].expr_value), (yyvsp[-2].case_stmt_list_value),NULL); }
 #line 1980 "parser.tab.cpp"
     break;
 
   case 61: /* switch_stmt: SWITCH '(' exp ')' '{' newline_seq_opt case_stmt_list default_stmt '}' newline_seq_opt  */
-#line 178 "parser.y"
-                                                                                                                                 {printf("          createSwitchStmt is worked\n"); (yyval.switch_stmt_value) = createSwitchStmt((yyvsp[-7].expr_value), (yyvsp[-3].case_stmt_list_value),(yyvsp[-2].default_stmt_value)); }
+#line 170 "parser.y"
+                                                                {printf("createSwitchStmt is worked\n"); (yyval.switch_stmt_value) = createSwitchStmt((yyvsp[-7].expr_value), (yyvsp[-3].case_stmt_list_value),(yyvsp[-2].default_stmt_value)); }
 #line 1986 "parser.tab.cpp"
     break;
 
   case 62: /* case_stmt_list: case_stmt  */
-#line 182 "parser.y"
-                                                {printf("          createCaseStmtList is worked\n");(yyval.case_stmt_list_value) = createCaseStmtList((yyvsp[0].case_stmt_value));}
+#line 172 "parser.y"
+                                                {printf("createCaseStmtList is worked\n");(yyval.case_stmt_list_value) = createCaseStmtList((yyvsp[0].case_stmt_value));}
 #line 1992 "parser.tab.cpp"
     break;
 
   case 63: /* case_stmt_list: case_stmt_list case_stmt  */
-#line 183 "parser.y"
-                                                                        {printf("          addToCaseStmtList is worked\n");(yyval.case_stmt_list_value) = addToCaseStmtList((yyvsp[-1].case_stmt_list_value), (yyvsp[0].case_stmt_value));}
+#line 173 "parser.y"
+                                                                        {printf("addToCaseStmtList is worked\n");(yyval.case_stmt_list_value) = addToCaseStmtList((yyvsp[-1].case_stmt_list_value), (yyvsp[0].case_stmt_value));}
 #line 1998 "parser.tab.cpp"
     break;
 
   case 64: /* case_stmt: CASE exp ':' newline_seq_opt  */
-#line 186 "parser.y"
-                                                                                                                        {printf("          newline_seq_opt is worked\n");(yyval.case_stmt_value) = createCaseStmt((yyvsp[-2].expr_value), NULL);}
+#line 176 "parser.y"
+                                                {printf("newline_seq_opt is worked\n");(yyval.case_stmt_value) = createCaseStmt((yyvsp[-2].expr_value), NULL);}
 #line 2004 "parser.tab.cpp"
     break;
 
   case 65: /* case_stmt: CASE exp ':' newline_seq_opt stmt_list  */
-#line 187 "parser.y"
-                                                                                        {printf("          CASE exp ':' newline_seq_opt stmt_list is worked\n"); (yyval.case_stmt_value) = createCaseStmt((yyvsp[-3].expr_value), (yyvsp[0].stmt_list_value));}
+#line 178 "parser.y"
+                                                {printf("CASE exp ':' newline_seq_opt stmt_list is worked\n"); (yyval.case_stmt_value) = createCaseStmt((yyvsp[-3].expr_value), (yyvsp[0].stmt_list_value));}
 #line 2010 "parser.tab.cpp"
     break;
 
   case 66: /* default_stmt: DEFAULT ':' newline_seq_opt stmt_list  */
-#line 191 "parser.y"
-                                                                                                    {printf("          DEFAULT ':' newline_seq_opt stmt_list stmt_list  is worked\n");(yyval.default_stmt_value) = createDefaultStmt((yyvsp[0].stmt_list_value));}
+#line 180 "parser.y"
+                                                {printf("DEFAULT ':' newline_seq_opt stmt_list stmt_list  is worked\n");(yyval.default_stmt_value) = createDefaultStmt((yyvsp[0].stmt_list_value));}
 #line 2016 "parser.tab.cpp"
     break;
 
   case 70: /* for_of: FOR '(' exp OF exp ')' stmt  */
-#line 200 "parser.y"
-                                             {(yyval.forOf_stmt_value) = createForOfStmt((yyvsp[-4].expr_value), (yyvsp[-2].expr_value), (yyvsp[0].stmt_value));}
+#line 183 "parser.y"
+                                       {(yyval.forOf_stmt_value) = createForOfStmt((yyvsp[-4].expr_value), (yyvsp[-2].expr_value), (yyvsp[0].stmt_value));}
 #line 2022 "parser.tab.cpp"
     break;
 
   case 71: /* array_handling: exp ASSIGNMENT '[' expr_list ']' SEMICOLON NEWLINE  */
-#line 203 "parser.y"
+#line 185 "parser.y"
                                                                    {(yyval.array_handling_value) = createArrayHandlingStmt((yyvsp[-6].expr_value), (yyvsp[-3].expr_list_value));}
 #line 2028 "parser.tab.cpp"
     break;
 
   case 72: /* expr_list: exp  */
-#line 206 "parser.y"
-                                                 {printf("             expr is created\n");(yyval.expr_list_value) = createExprList((yyvsp[0].expr_value));}
+#line 187 "parser.y"
+                                                 {printf("expr is created\n");(yyval.expr_list_value) = createExprList((yyvsp[0].expr_value));}
 #line 2034 "parser.tab.cpp"
     break;
 
   case 73: /* expr_list: expr_list ',' exp  */
-#line 207 "parser.y"
-                                         {printf("             addToExpr is preformed\n");(yyval.expr_list_value) = addToExprList((yyvsp[-2].expr_list_value), (yyvsp[0].expr_value));}
+#line 188 "parser.y"
+                                         {printf("addToExpr is preformed\n");(yyval.expr_list_value) = addToExprList((yyvsp[-2].expr_list_value), (yyvsp[0].expr_value));}
 #line 2040 "parser.tab.cpp"
     break;
 
-  case 74: /* console_in: CONSOLE_IN '(' exp ')' SEMICOLON newline_seq_opt  */
-#line 211 "parser.y"
-                                                                {(yyval.stmt_value) = createConsoleInStmt((yyvsp[-3].expr_value));}
+  case 74: /* input: INPUT '(' exp ')' SEMICOLON newline_seq_opt  */
+#line 190 "parser.y"
+                                                        {(yyval.stmt_value) = createConsoleInStmt((yyvsp[-3].expr_value));}
 #line 2046 "parser.tab.cpp"
     break;
 
-  case 75: /* console_in: CONSOLE_IN '(' exp ')' newline_seq  */
-#line 212 "parser.y"
-                                                                                        {(yyval.stmt_value) = createConsoleInStmt((yyvsp[-2].expr_value));}
+  case 75: /* input: INPUT '(' exp ')' newline_seq  */
+#line 191 "parser.y"
+                                                                                {(yyval.stmt_value) = createConsoleInStmt((yyvsp[-2].expr_value));}
 #line 2052 "parser.tab.cpp"
     break;
 
-  case 76: /* console_out: CONSOLE_OUT '(' exp ')' SEMICOLON newline_seq_opt  */
-#line 215 "parser.y"
-                                                                {(yyval.stmt_value) = createConsoleOutStmt((yyvsp[-3].expr_value));}
+  case 76: /* output: OUTPUT '(' exp ')' SEMICOLON newline_seq_opt  */
+#line 193 "parser.y"
+                                                        {(yyval.stmt_value) = createConsoleOutStmt((yyvsp[-3].expr_value));}
 #line 2058 "parser.tab.cpp"
     break;
 
-  case 77: /* console_out: CONSOLE_OUT '(' exp ')' newline_seq  */
-#line 216 "parser.y"
+  case 77: /* output: OUTPUT '(' exp ')' newline_seq  */
+#line 194 "parser.y"
                                                                                         {(yyval.stmt_value) = createConsoleOutStmt((yyvsp[-2].expr_value));}
 #line 2064 "parser.tab.cpp"
     break;
@@ -2289,22 +2289,26 @@ yyreturn:
   return yyresult;
 }
 
-#line 218 "parser.y"
+#line 195 "parser.y"
 
 
 int main(int argc, char *argv[]){
 
 	if(argc>1)
-		yyin = fopen(argv[1], "r");
+		{	
+			yyin = fopen(argv[1], "r");
+		}
 	yyparse();
 	FILE * _filename;
 	_filename = fopen(argv[2], "w");
-	if(_filename == NULL ) yyerror("Eorror opening file");
-	else{
+	if(_filename == NULL ) 
+		yyerror("Eorror opening file");
+	else
+		{
 		printf("Printing Tree\n");
 		write_tree(_filename);
-		printf("Tree is printed in output_<filename>\n");
-	}
+		printf("Tree is printed in output.txt\n");
+		}
 	
 	fclose(_filename);
 	

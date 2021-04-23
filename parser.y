@@ -209,7 +209,7 @@ int main(int argc, char *argv[]){
 		{
 		printf("Printing Tree\n");
 		write_tree(_filename);
-		printf("Tree is printed in output_<filename>\n");
+		printf("Tree is printed in output.txt\n");
 		}
 	
 	fclose(_filename);
