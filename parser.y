@@ -57,8 +57,8 @@ extern FILE* yyin;
 %token BREAK
 %token DEFAULT
 %token OF
-%token CONSOLE_IN
-%token CONSOLE_OUT
+%token INPUT
+%token OUTPUT
 %token SEMICOLON
 %token NEWLINE
 %token LET
@@ -80,7 +80,7 @@ extern FILE* yyin;
 
 %type <expr_value> exp
 %type <expr_list_value> expr_list
-%type <stmt_value> stmt  while_stmt do_while_stmt  console_in console_out    
+%type <stmt_value> stmt  while_stmt do_while_stmt  input output    
 %type <if_stmt_value>if_stmt
 %type <stmt_list_value> program stmt_list  
 %type <elseif_stmt_list_value> elseif_stmt_list
@@ -136,8 +136,8 @@ stmt:  SEMICOLON  newline_seq_opt						{printf("empty stmt \n"); $$=createStmtNu
 	| do_while_stmt										{$$= $1; }
 	| switch_stmt										{printf("fillSwitchStmt worked\n");$$= fillSwitchStmt($1);}
 	| for_of											{$$= fillForOfStmt($1); }
-	| console_in										{$$= $1; }
-	| console_out										{$$= $1; }	;
+	| input										{$$= $1; }
+	| output										{$$= $1; }	;
 	
 
 stmt_list: 	stmt 				{printf("stmt is created\n");$$ = createStmtList($1);}		 
@@ -187,11 +187,11 @@ array_handling: exp ASSIGNMENT '[' expr_list ']' SEMICOLON NEWLINE {$$ = createA
 expr_list: exp					 {printf("expr is created\n");$$ = createExprList($1);}
 		 | expr_list ',' exp     {printf("addToExpr is preformed\n");$$ = addToExprList($1, $3);};
 
-console_in: CONSOLE_IN '(' exp  ')' SEMICOLON newline_seq_opt 	{$$ = createConsoleInStmt($3);}
-		  | CONSOLE_IN '(' exp  ')'  newline_seq			 	{$$ = createConsoleInStmt($3);};   
+input: INPUT '(' exp  ')' SEMICOLON newline_seq_opt 	{$$ = createConsoleInStmt($3);}
+		  | INPUT '(' exp  ')'  newline_seq			 	{$$ = createConsoleInStmt($3);};   
 
-console_out: CONSOLE_OUT '(' exp ')' SEMICOLON newline_seq_opt 	{$$ = createConsoleOutStmt($3);}
-			| CONSOLE_OUT '(' exp ')' newline_seq				{$$ = createConsoleOutStmt($3);};
+output: OUTPUT '(' exp ')' SEMICOLON newline_seq_opt 	{$$ = createConsoleOutStmt($3);}
+			| OUTPUT '(' exp ')' newline_seq				{$$ = createConsoleOutStmt($3);};
 %%
 
 int main(int argc, char *argv[]){

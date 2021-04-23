@@ -13,11 +13,9 @@
   char octalToDecimal(char* octal);
 %}
 
-%x STRING
-%x STRING_DOUBLE_QUOTED
-%x MCOMMENT
-%x LCOMMENT
-%x HLCOMMENT
+%x SINGLE_QUOTES_STRING
+%x DOUBLE_QUOTES_STRING
+%x MULTILINE_COMMENT
 	
 DIGIT   [0-9]+
 ID      [$_a-zA-Z][$_a-zA-Z0-9]*
@@ -29,52 +27,51 @@ ID      [$_a-zA-Z][$_a-zA-Z0-9]*
 	char temp[2];
 %}
 
-break		  {printf("break is here\n");return BREAK;}
-case		  {return CASE;}
-default		{return DEFAULT;}
-do			  {return DO;}
-if			  {printf("if is found\n");return IF;}
-else		  {printf("else is found\n");return ELSE;}
-"else if" {printf("else if is found\n");return ELSEIF;}
-for			  {return FOR;}
-of			  {return OF;}
-switch		{return SWITCH;}
-var     	{return VAR;}
-let     	{return LET;}
-const     {return CONST;}
-while		  {return WHILE;}
-final		  {return FINAL;}
+break		  {printf("Found break\n");return BREAK;}
+case		  {printf("Found case\n"); return CASE;}
+default		{printf("Found default\n"); return DEFAULT;}
+do			  {printf("Found do\n"); return DO;}
+if			  {printf("Found if\n");return IF;}
+else		  {printf("Found else\n");return ELSE;}
+"else if" {printf("Found else if\n");return ELSEIF;}
+for			  {printf("Found for\n"); return FOR;}
+of			  {printf("Found of\n"); return OF;}
+switch		{printf("Found switch\n"); return SWITCH;}
+var     	{printf("Found var\n"); return VAR;}
+let     	{printf("Found let\n"); return LET;}
+const     {printf("Found const\n"); return CONST;}
+while		  {printf("Found while\n"); return WHILE;}
+final		  {printf("Found final\n"); return FINAL;}
 
+input     {printf("Found input\n"); return INPUT;}
+output	  {printf("Found output\n"); return OUTPUT;}
 
-console_in   {return CONSOLE_IN;}
-console_out	{return CONSOLE_OUT;}
-
-"+"     {printf("Found Operator: +\n"); return '+';}
-"-"     {printf("Found Operator: -\n"); return '-';}
-"/"     {printf("Found Operator: /\n"); return '/';}
-"*"     {printf("Found Operator: *\n"); return '*';}
-"%"		  {printf("Found Operator: %\n"); return '%';}
-"**"	  {printf("Found Operator: **\n"); return POW;}
-"="     {printf("Found Operator: =\n"); return ASSIGNMENT;}
-"=="    {printf("Found Operator: ==\n"); return EQUAL;}
-"==="   {printf("Found Operator: ===\n"); return STRICT_EQUAL;}
-"!="	  {printf("Found Operator: !=\n"); return NOT_EQUAL;}
-">"		  {printf("Found Operator: >\n"); return '>';}
-"<"		  {printf("Found Operator: <\n"); return '<';}
-">="	  {printf("Found Operator: =>\n"); return BIGGER_EQUAL;}
-"<="	  {printf("Found Operator: <=\n"); return SMALLER_EQUAL;}
-"!"     {printf("Found Operator: !\n"); return NOT;}
-"||"    {printf("Found Operator: ||\n"); return OR ;}
-"&&"    {printf("Found Operator: &&\n"); return AND;}
-"{"     {printf("Found Token: {\n"); return '{';}
-"}"     {printf("Found Token: }\n"); return '}';}
-"["	  	{printf("Found Token: [\n"); return '[';}
-"]"		  {printf("Found Token: ]\n"); return ']';}
-"("     {printf("Found Token: (\n"); return '(';}
-")"     {printf("Found Token: )\n"); return ')';}
-";"     {printf("Found Token: ;\n"); return SEMICOLON;}
-","     {printf("Found Token: ,\n"); return ',';}
-":"		  {printf("Found Token: :\n"); return ':';}
+"+"       {printf("Found +\n"); return '+';}
+"-"       {printf("Found -\n"); return '-';}
+"/"       {printf("Found /\n"); return '/';}
+"*"       {printf("Found *\n"); return '*';}
+"%"		    {printf("Found %\n"); return '%';}
+"**"	    {printf("Found **\n"); return POW;}
+"="       {printf("Found =\n"); return ASSIGNMENT;}
+"=="      {printf("Found ==\n"); return EQUAL;}
+"==="     {printf("Found ===\n"); return STRICT_EQUAL;}
+"!="	    {printf("Found !=\n"); return NOT_EQUAL;}
+">"		    {printf("Found >\n"); return '>';}
+"<"		    {printf("Found <\n"); return '<';}
+">="	    {printf("Found =>\n"); return BIGGER_EQUAL;}
+"<="	    {printf("Found <=\n"); return SMALLER_EQUAL;}
+"!"       {printf("Found !\n"); return NOT;}
+"||"      {printf("Found ||\n"); return OR ;}
+"&&"      {printf("Found &&\n"); return AND;}
+"{"       {printf("Found {\n"); return '{';}
+"}"       {printf("Found }\n"); return '}';}
+"["	  	  {printf("Found [\n"); return '[';}
+"]"		    {printf("Found ]\n"); return ']';}
+"("       {printf("Found (\n"); return '(';}
+")"       {printf("Found )\n"); return ')';}
+";"       {printf("Found ;\n"); return SEMICOLON;}
+","       {printf("Found ,\n"); return ',';}
+":"		    {printf("Found :\n"); return ':';}
 
 {ID}	  {
   printf("variable : %s\n", yytext);
@@ -96,63 +93,61 @@ console_out	{return CONSOLE_OUT;}
 \t 		;
 \n		{printf("NewLine \\n \n");return NEWLINE;}
 " "		;
-\'    {strcpy(str," "); BEGIN(STRING);}
-\" 		{strcpy(str," "); BEGIN(STRING_DOUBLE_QUOTED);}
+\'    {strcpy(str," "); BEGIN(SINGLE_QUOTES_STRING);}
+\" 		{strcpy(str," "); BEGIN(DOUBLE_QUOTES_STRING);}
         
-<STRING,STRING_DOUBLE_QUOTED>\\\'   {strcat(str, "\'");}
-<STRING,STRING_DOUBLE_QUOTED>\\\"   {strcat(str, "\"");}
-<STRING,STRING_DOUBLE_QUOTED>\\\\   {strcat(str, "\\");}
-<STRING,STRING_DOUBLE_QUOTED>\\n    {strcat(str, "\n");}
-<STRING,STRING_DOUBLE_QUOTED>\\r    {strcat(str, "\r");}
-<STRING,STRING_DOUBLE_QUOTED>\\v    {strcat(str, "\v");}
-<STRING,STRING_DOUBLE_QUOTED>\\t    {strcat(str, "\t");}
-<STRING,STRING_DOUBLE_QUOTED>\\b    {strcat(str, "\b");}
-<STRING,STRING_DOUBLE_QUOTED>\\f    {strcat(str, "\f");}
-<STRING,STRING_DOUBLE_QUOTED>\\\n		;
-<STRING,STRING_DOUBLE_QUOTED>\n		  {
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\\'   {strcat(str, "\'");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\\"   {strcat(str, "\"");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\\\   {strcat(str, "\\");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\n    {strcat(str, "\n");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\r    {strcat(str, "\r");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\v    {strcat(str, "\v");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\t    {strcat(str, "\t");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\b    {strcat(str, "\b");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\f    {strcat(str, "\f");}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\\n		;
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\n		  {
   printf("there is an error in line: %d\n",yylineno);
   BEGIN(INITIAL);
 }
 
-<STRING,STRING_DOUBLE_QUOTED>\\[0-7]{1,3} {
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>\\[0-7]{1,3} {
   temp[0] = octalToDecimal(yytext);
   temp[1] = 0; strcat(str, temp );
 }
-<STRING,STRING_DOUBLE_QUOTED>[^\'\"\\\n\r\v\b\f]+   {strcat(str,yytext);}
+<SINGLE_QUOTES_STRING,DOUBLE_QUOTES_STRING>[^\'\"\\\n\r\v\b\f]+   {strcat(str,yytext);}
 	
-<STRING_DOUBLE_QUOTED><<EOF>>	{
+<DOUBLE_QUOTES_STRING><<EOF>>	{
   printf("The \" is not closed in line: %d\n", yylineno);
   BEGIN(INITIAL);
 }
 
-<STRING_DOUBLE_QUOTED>\" {
+<DOUBLE_QUOTES_STRING>\" {
   printf("Double Quoted String: %s\n",str);
   yylval.Id = (char *)malloc(sizeof(str)+1);
   strcpy(yylval.Id,str);  BEGIN(INITIAL); return STRINGDOUBLEQUOTED;
 }
 	
-<STRING><<EOF>>	{
+<SINGLE_QUOTES_STRING><<EOF>>	{
   printf("The \' is not closed in line: %d\n", yylineno);
   BEGIN(INITIAL);
 }
-<STRING>\' {
+<SINGLE_QUOTES_STRING>\' {
   printf("Single Quoted String: %s\n",str);
   yylval.Id = (char *)malloc(sizeof(str)+1);
   strcpy(yylval.Id, str); BEGIN(INITIAL); return STRINGONEQOUTED;
 }
 		
-\/\*  BEGIN(MCOMMENT);
+\/\*  BEGIN(MULTILINE_COMMENT);
 
-<MCOMMENT>[^*]* 
-<MCOMMENT>"*"+[^*/]* 
-<MCOMMENT>"*"+"/"  {printf("Multi-Line Comment\n");BEGIN(INITIAL);}
+<MULTILINE_COMMENT>[^*]* 
+<MULTILINE_COMMENT>"*"+[^*/]* 
+<MULTILINE_COMMENT>"*"+"/"  {printf("Multi-Line Comment\n");BEGIN(INITIAL);}
 
 
-\/\/ {printf("One Line Comment\n"); BEGIN(LCOMMENT);}
-<LCOMMENT>.* { BEGIN(INITIAL);}
+\/\/ {printf("One Line Comment\n");}
 
-#!	{ printf("Hashbang Comment"); BEGIN(HLCOMMENT);	}
-<HLCOMMENT>.* { BEGIN(INITIAL);}
+#!	{ printf("Hashbang Comment");}
 			
 %%
 

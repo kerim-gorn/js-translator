@@ -4,5 +4,5 @@ for(element of array){
 	c = b+4;
 	d = c+5;
 }
-console_in (a=a+b);
-console_out ("Hello World");
+input (a=a+b);
+output ("Hello World");
