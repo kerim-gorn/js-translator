@@ -82,8 +82,6 @@ struct stmt_struct* createStmtBreak()
 
 	temp->type = Break;
 	temp->expr_value = result;
-	//	temp->expr_value->type = Id;
-	//	temp->expr_value->value = "break";
 
 	return temp;
 }
@@ -102,7 +100,6 @@ struct stmt_list_struct* createStmtList(struct stmt_struct* _stmt)
 {
 	auto temp = static_cast<stmt_list_struct*>(malloc(sizeof(struct stmt_list_struct)));
 
-	//temp->type = Stmt_List;
 	temp->First = _stmt;
 	temp->Next = nullptr;
 	return temp;
@@ -398,9 +395,6 @@ struct expr_list_struct* addToExprList(struct expr_list_struct* _exprHead, struc
 	return _exprHead;
 }
 
-/*******************************Printing Tree Functions **************************************/
-
-
 void yyerror(const char* s)
 {
 	printf("%s", s);
@@ -418,7 +412,7 @@ void write_tree(FILE* _filename)
 		fputs(dataToAppend, _filename);
 		write_stmt_list(root, nullptr, _filename);
 		decorate_AST(root);
-		printf("write_tree done his job\n");
+		printf("printed tree\n");
 	}
 	fputs("\n\n\n }", _filename);
 }
@@ -439,7 +433,7 @@ void write_stmt_list(struct stmt_list_struct* _stmtList,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+	sprintf(leftOperandPath, "%s", "");
 	sprintf(buffer, "%d", _variableCounter);
 	strcat(leftOperandPath, buffer);
 	strcat(leftOperandPath, "->");
@@ -473,7 +467,7 @@ void write_elseif_stmt_list(struct elseif_stmt_list_struct* _stmtList,
 			fputs(buffer, _filename);
 			fputs(";\n", _filename);
 		}
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -507,7 +501,7 @@ void write_case_stmt_list(struct case_stmt_list_struct* _stmtList,
 			fputs(buffer, _filename);
 			fputs(";\n", _filename);
 		}
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -546,7 +540,7 @@ void write_stmt(struct stmt_struct* _stmt,
 		createLabel(_variableCounter, "expr_stmt", dataToAppend);
 		fputs(dataToAppend, _filename);
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 
 		if (_parentPath != nullptr)
 			strcat(leftOperandPath, _parentPath);
@@ -569,7 +563,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -593,7 +587,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
@@ -616,7 +610,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
@@ -642,7 +636,7 @@ void write_stmt(struct stmt_struct* _stmt,
 				fputs(";\n", _filename);
 			}
 
-			sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+			sprintf(leftOperandPath, "%s", "");
 			sprintf(leftOperandPath, "%d", _variableCounter);
 			strcat(leftOperandPath, "->");
 
@@ -667,7 +661,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -689,7 +683,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -715,7 +709,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -737,7 +731,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -771,7 +765,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -795,7 +789,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -815,7 +809,7 @@ void write_stmt(struct stmt_struct* _stmt,
 			fputs(";\n", _filename);
 		}
 
-		sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+		sprintf(leftOperandPath, "%s", "");
 		sprintf(buffer, "%d", _variableCounter);
 		strcat(leftOperandPath, buffer);
 		strcat(leftOperandPath, "->");
@@ -849,8 +843,8 @@ void write_expr(struct expr_struct* _expr,
 
 		fputs(dataToAppend, _filename);
 
-		sprintf(dataToAppend, "%s", ""); //to empty the dataToAppend
-		sprintf(buffer, "%s", ""); // to empty the buffer
+		sprintf(dataToAppend, "%s", "");
+		sprintf(buffer, "%s", "");
 		_variableCounter++;
 		break;
 	case Float:
@@ -865,8 +859,8 @@ void write_expr(struct expr_struct* _expr,
 
 		fputs(dataToAppend, _filename);
 
-		sprintf(dataToAppend, "%s", ""); //to empty the dataToAppend
-		sprintf(buffer, "%s", ""); // to empty the buffer
+		sprintf(dataToAppend, "%s", "");
+		sprintf(buffer, "%s", "");
 		_variableCounter++;
 		break;
 	case Id:
@@ -880,8 +874,8 @@ void write_expr(struct expr_struct* _expr,
 
 		fputs(dataToAppend, _filename);
 
-		sprintf(dataToAppend, "%s", ""); //to empty the dataToAppend
-		sprintf(buffer, "%s", ""); // to empty the buffer
+		sprintf(dataToAppend, "%s", "");
+		sprintf(buffer, "%s", "");
 		_variableCounter++;
 		break;
 	case array_element_access:
@@ -951,7 +945,6 @@ void write_expr(struct expr_struct* _expr,
 }
 
 void write_expr_list(struct expr_list_struct* _exprList,
-                     //int _variableCounter,
                      char* _parentPath,
                      FILE* _filename)
 {
@@ -970,7 +963,7 @@ void write_expr_list(struct expr_list_struct* _exprList,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+	sprintf(leftOperandPath, "%s", "");
 
 	sprintf(buffer, "%d", _variableCounter);
 	strcat(leftOperandPath, buffer);
@@ -984,7 +977,6 @@ void write_expr_list(struct expr_list_struct* _exprList,
 	}
 }
 
-// [1 [label="a"]] - 1=_variableNum and a=_variableId
 void createLabel(int _variableNum,
                  const char* _variableId,
                  char* result)
@@ -993,7 +985,6 @@ void createLabel(int _variableNum,
 	sprintf(buffer, "%d", _variableNum);
 	sprintf(result, "%s", "");
 	strcat(result, buffer);
-	//strcat(result, buffer);
 	strcat(result, " [label=\"");
 	strcat(result, _variableId);
 	strcat(result, "\"]\n");
@@ -1019,7 +1010,7 @@ void write_binary_expr(struct expr_struct* _expr,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+	sprintf(leftOperandPath, "%s", "");
 
 	sprintf(buffer, "%d", _variableCounter);
 	strcat(leftOperandPath, buffer);
@@ -1051,7 +1042,7 @@ void write_unary_expr(struct expr_struct* _expr,
 		fputs(";\n", _filename);
 	}
 
-	sprintf(leftOperandPath, "%s", ""); // to empty the leftOperandPath
+	sprintf(leftOperandPath, "%s", "");
 
 	sprintf(buffer, "%d", _variableCounter);
 	strcat(leftOperandPath, buffer);

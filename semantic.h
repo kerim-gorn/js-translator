@@ -1,7 +1,7 @@
 #ifndef SEMANTIC_H
 #define SEMANTIC_H
 
-#endif // SEMANTIC_H
+#endif
 #include "data_struct.h"
 
 void decorate_AST(struct stmt_list_struct* _stmtlist);

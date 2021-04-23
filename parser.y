@@ -204,7 +204,7 @@ int main(int argc, char *argv[]){
 	FILE * _filename;
 	_filename = fopen(argv[2], "w");
 	if(_filename == NULL ) 
-		yyerror("Eorror opening file");
+		yyerror("Error opening file");
 	else
 		{
 		printf("Printing Tree\n");
