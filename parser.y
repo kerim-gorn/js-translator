@@ -93,8 +93,7 @@ extern FILE* yyin;
 %type <default_stmt_value> default_stmt
 %type <case_stmt_value> case_stmt
 %%
-program: stmt_list { $$ = root = $1;}
-	;
+program: stmt_list { $$ = root = $1;};
 
 exp:   DIGIT						{printf("DIGIT is printed\n"); $$ = createDigitExpr($1);}
     |  FLOAT_DIGIT					{printf("FLOAT_DIGIT is printed\n");$$ = createFloatExpr($1);}
@@ -122,114 +121,96 @@ exp:   DIGIT						{printf("DIGIT is printed\n"); $$ = createDigitExpr($1);}
 	| exp AND exp 					{printf("exp AND exp  worked\n");$$ = createBinaryOpeartionExpr(And, $1 , $3);}
 	| NOT exp						{printf("NOT exp  worked\n");$$ = createUnaryOpeartionExpr(Not, $2 );}
 	| '+' exp %prec UPLUS			{printf(" + exp  worked\n");$$ = createUnaryOpeartionExpr(Uplu, $2 );}
-	| '-' exp %prec UMINUS 		{printf(" - exp  worked\n");$$ = createUnaryOpeartionExpr(Umin, $2 );}
-	;
+	| '-' exp %prec UMINUS 		{printf(" - exp  worked\n");$$ = createUnaryOpeartionExpr(Umin, $2 );}	;
 	
-
-stmt: /*empty*/ SEMICOLON  newline_seq_opt						{printf("empty stmt \n"); $$=createStmtNull();}
+stmt:  SEMICOLON  newline_seq_opt						{printf("empty stmt \n"); $$=createStmtNull();}
 	| BREAK SEMICOLON newline_seq_opt 		 			{printf("create break stmt\n"); $$=createStmtBreak();}
 	| BREAK newline_seq				 		 			{printf("create break stmt\n"); $$=createStmtBreak();}
 	| exp SEMICOLON  newline_seq_opt         	    	{$$ = createStmt($1);}
 	| exp newline_seq          							{$$ = createStmt($1);}
-	| '{' newline_seq_opt stmt_list '}' newline_seq_opt					{$$ = createBlockStmt($3);}
+	| '{' newline_seq_opt stmt_list '}' newline_seq_opt	{$$ = createBlockStmt($3);}
     | array_handling 									{$$= createArray($1); }     
 	| if_stmt 											{$$= FillIfStmt($1);}
 	| for_stmt											{$$= FillForStmt($1); }
 	| while_stmt										{$$= $1; }
 	| do_while_stmt										{$$= $1; }
-	| switch_stmt									{printf("                     fillSwitchStmt worked\n");$$= fillSwitchStmt($1);}
+	| switch_stmt										{printf("fillSwitchStmt worked\n");$$= fillSwitchStmt($1);}
 	| for_of											{$$= fillForOfStmt($1); }
 	| console_in										{$$= $1; }
-	| console_out										{$$= $1; }
-	;
+	| console_out										{$$= $1; }	;
 	
 
-stmt_list: 	stmt 				{printf("                 stmt is created\n");$$ = createStmtList($1);}		 
-		| stmt_list stmt		{printf("                 addToStmtList is preformed\n");$$ = addToStmtList($1, $2);}									
-		;
+stmt_list: 	stmt 				{printf("stmt is created\n");$$ = createStmtList($1);}		 
+		| stmt_list stmt		{printf("addToStmtList is preformed\n");$$ = addToStmtList($1, $2);}	;
 
-type: LET
-    | VAR
-	| CONST
-	;
-if_stmt: IF newline_seq_opt '('  exp ')' stmt									{printf("                    IfStmt is worked\n"); $$ = createIfStmt($4, $6, NULL);}
-		| IF newline_seq_opt '(' exp ')' stmt ELSE stmt							{printf("                    IfElseStmt is worked\n"); $$ = createIfStmt($4, $6, $8);}
-		| IF  newline_seq_opt '(' exp ')' stmt elseif_stmt_list					{printf("                    If and ElseIf is worked\n"); $$ = createElseIfStmt($4, $6, $7,NULL);}
-		| IF newline_seq_opt '(' exp ')' stmt elseif_stmt_list ELSE stmt		{printf("                    If, ElseIf and Else is worked"); $$ = createElseIfStmt($4, $6, $7, $9);} 
-		;
+type: LET | VAR	| CONST	;
+if_stmt: IF newline_seq_opt '('  exp ')' stmt									
+				{printf("IfStmt is worked\n"); $$ = createIfStmt($4, $6, NULL);}
+		| IF newline_seq_opt '(' exp ')' stmt ELSE stmt							
+				{printf("IfElseStmt is worked\n"); $$ = createIfStmt($4, $6, $8);}
+		| IF  newline_seq_opt '(' exp ')' stmt elseif_stmt_list					
+				{printf("If and ElseIf is worked\n"); $$ = createElseIfStmt($4, $6, $7,NULL);}
+		| IF newline_seq_opt '(' exp ')' stmt elseif_stmt_list ELSE stmt		
+				{printf("If, ElseIf and Else is worked"); $$ = createElseIfStmt($4, $6, $7, $9);};
 		
 elseif_stmt_list: elseif_stmt  					{$$ = createElseIfStmtList($1);}
-		| elseif_stmt_list  elseif_stmt 		{$$ = addToElseIfStmtList($1, $2);}
-		;
-elseif_stmt: ELSEIF '(' exp ')' newline_seq_opt stmt            {$$ = createSimpleElseIfStmt($3,$6);}
-			;
+		| elseif_stmt_list  elseif_stmt 		{$$ = addToElseIfStmtList($1, $2);}	;
+
+elseif_stmt: ELSEIF '(' exp ')' newline_seq_opt stmt            {$$ = createSimpleElseIfStmt($3,$6);};
  		
-for_stmt: FOR '(' exp SEMICOLON exp SEMICOLON exp ')' stmt {$$ = createForStmt($3, $5, $7, $9);}
-		;
+for_stmt: FOR '(' exp SEMICOLON exp SEMICOLON exp ')' stmt {$$ = createForStmt($3, $5, $7, $9);};
 
-while_stmt: WHILE '(' exp ')' stmt    {$$ = createWhileStmt($3, $5);} 
-			;
+while_stmt: WHILE '(' exp ')' stmt    {$$ = createWhileStmt($3, $5);};
  
-do_while_stmt: DO stmt WHILE '('  exp ')' SEMICOLON newline_seq_opt {$$ = createDoWhileStmt($2, $5);} 
-			; 
+do_while_stmt: DO stmt WHILE '('  exp ')' SEMICOLON newline_seq_opt {$$ = createDoWhileStmt($2, $5);}; 
 
+switch_stmt: SWITCH '(' exp ')' '{' newline_seq_opt  case_stmt_list  '}' newline_seq_opt					 
+								{printf("createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,NULL); }
+			| SWITCH '(' exp ')' '{' newline_seq_opt case_stmt_list default_stmt'}' 	newline_seq_opt 	
+								{printf("createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,$8); }; 
 
-switch_stmt: SWITCH '(' exp ')' '{' newline_seq_opt  case_stmt_list  '}' newline_seq_opt					 {printf("          createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,NULL); }
-			| SWITCH '(' exp ')' '{' newline_seq_opt case_stmt_list default_stmt'}' 	newline_seq_opt 	 {printf("          createSwitchStmt is worked\n"); $$ = createSwitchStmt($3, $7,$8); }
-			; 
-
-
-case_stmt_list: case_stmt                       {printf("          createCaseStmtList is worked\n");$$ = createCaseStmtList($1);}
-			| case_stmt_list case_stmt			{printf("          addToCaseStmtList is worked\n");$$ = addToCaseStmtList($1, $2);}
-			;
+case_stmt_list: case_stmt                       {printf("createCaseStmtList is worked\n");$$ = createCaseStmtList($1);}
+			| case_stmt_list case_stmt			{printf("addToCaseStmtList is worked\n");$$ = addToCaseStmtList($1, $2);};
 				
-case_stmt: CASE exp ':'	newline_seq_opt											{printf("          newline_seq_opt is worked\n");$$ = createCaseStmt($2, NULL);}
-			| CASE exp ':' newline_seq_opt stmt_list 			{printf("          CASE exp ':' newline_seq_opt stmt_list is worked\n"); $$ = createCaseStmt($2, $5);}
-		//	| CASE exp ':'  NEWLINE BREAK SEMICOLON NEWLINE				{printf("          CASE exp ':'  NEWLINE BREAK SEMICOLON NEWLINE is worked\n"); $$ = createCaseStmt($2, NULL);}
-		//	| CASE exp ':' NEWLINE stmt_list BREAK SEMICOLON NEWLINE	{printf("          CASE exp ':' NEWLINE stmt_list BREAK SEMICOLON NEWLINE is worked\n"); $$ = createCaseStmt($2, $5);}
-			;
-default_stmt: DEFAULT ':' newline_seq_opt stmt_list      					    {printf("          DEFAULT ':' newline_seq_opt stmt_list stmt_list  is worked\n");$$ = createDefaultStmt($4);}
-		//	| DEFAULT ':' newline_seq_opt BREAK SEMICOLON NEWLINE				{printf("          DEFAULT ':' NEWLINE BREAK SEMICOLON NEWLINE is worked\n");$$ = createDefaultStmt(NULL);}
-		//	| DEFAULT ':' NEWLINE stmt_list  BREAK SEMICOLON NEWLINE	{printf("          DEFAULT ':' NEWLINE stmt_list  BREAK SEMICOLON NEWLINE is worked\n");$$ = createDefaultStmt($4);}
-			;
-newline_seq: NEWLINE newline_seq_opt
-			;
-newline_seq_opt: /*empty*/
-				| newline_seq_opt NEWLINE
-				;
-for_of : FOR '(' exp OF exp ')'  stmt        {$$ = createForOfStmt($3, $5, $7);}
-		;
+case_stmt: CASE exp ':'	newline_seq_opt							
+						{printf("newline_seq_opt is worked\n");$$ = createCaseStmt($2, NULL);}
+			| CASE exp ':' newline_seq_opt stmt_list 			
+						{printf("CASE exp ':' newline_seq_opt stmt_list is worked\n"); $$ = createCaseStmt($2, $5);};
+default_stmt: DEFAULT ':' newline_seq_opt stmt_list      					   
+						{printf("DEFAULT ':' newline_seq_opt stmt_list stmt_list  is worked\n");$$ = createDefaultStmt($4);};
+newline_seq: NEWLINE newline_seq_opt;
+newline_seq_opt: | newline_seq_opt NEWLINE;
+for_of : FOR '(' exp OF exp ')'  stmt  {$$ = createForOfStmt($3, $5, $7);};
  
-array_handling: exp ASSIGNMENT '[' expr_list ']' SEMICOLON NEWLINE {$$ = createArrayHandlingStmt($1, $4);}
- 			  ;
+array_handling: exp ASSIGNMENT '[' expr_list ']' SEMICOLON NEWLINE {$$ = createArrayHandlingStmt($1, $4);};
 
-expr_list: exp					 {printf("             expr is created\n");$$ = createExprList($1);}
-		 | expr_list ',' exp     {printf("             addToExpr is preformed\n");$$ = addToExprList($1, $3);}
-	   	 ;
-
+expr_list: exp					 {printf("expr is created\n");$$ = createExprList($1);}
+		 | expr_list ',' exp     {printf("addToExpr is preformed\n");$$ = addToExprList($1, $3);};
 
 console_in: CONSOLE_IN '(' exp  ')' SEMICOLON newline_seq_opt 	{$$ = createConsoleInStmt($3);}
-		  | CONSOLE_IN '(' exp  ')'  newline_seq			 	{$$ = createConsoleInStmt($3);}
-		  ;   
+		  | CONSOLE_IN '(' exp  ')'  newline_seq			 	{$$ = createConsoleInStmt($3);};   
 
 console_out: CONSOLE_OUT '(' exp ')' SEMICOLON newline_seq_opt 	{$$ = createConsoleOutStmt($3);}
-			| CONSOLE_OUT '(' exp ')' newline_seq				{$$ = createConsoleOutStmt($3);}
-	 	   ;
+			| CONSOLE_OUT '(' exp ')' newline_seq				{$$ = createConsoleOutStmt($3);};
 %%
 
 int main(int argc, char *argv[]){
 
 	if(argc>1)
-		yyin = fopen(argv[1], "r");
+		{	
+			yyin = fopen(argv[1], "r");
+		}
 	yyparse();
 	FILE * _filename;
 	_filename = fopen(argv[2], "w");
-	if(_filename == NULL ) yyerror("Eorror opening file");
-	else{
+	if(_filename == NULL ) 
+		yyerror("Eorror opening file");
+	else
+		{
 		printf("Printing Tree\n");
 		write_tree(_filename);
 		printf("Tree is printed in output_<filename>\n");
-	}
+		}
 	
 	fclose(_filename);
 	
